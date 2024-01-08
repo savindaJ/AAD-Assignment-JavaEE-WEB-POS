@@ -1,29 +1,37 @@
+/*
 let tableBody = $("#body");
 
 
-$(`#save-customer`).click(function () {
-    let idVal = $("#customer-gmail").val();
-    if (searchCustomer(idVal.trim()) === undefined) {
+$(`#save-customer`).on('click',function () {
+    // let idVal = $("#customer-gmail").val();
+    /!*if (searchCustomer(idVal.trim()) === undefined) {
         let id = $("#customer-gmail");
         let address = $("#customer-address");
         let name = $("#customer-name");
-        let tp = $("#customer-tp");
+        let tp = $("#customer-tp");*!/
 
-        customer = {
-            name: name.val(),
-            id: id.val(),
-            address: address.val(),
-            tp: tp.val()
+    console.log("click !")
+    $.ajax({
+        url: baseUrl + "customer",
+        type: "post",
+        dataType: "json",
+        data:{
+            id:"c001"
+        },
+        success: function (res) {
+            alert("saved !")
+        },
+        error: function (err) {
+           /!* let parse = JSON.parse(err.responseText);
+            alert(parse.message);*!/
         }
-        customerDB.push(customer);
-    }else {
-        alert("already exit item iD");
-    }
-    getAll();
-    clearCustomerInputFields();
+    });
+
+    /!*getAll();
+    clearCustomerInputFields();*!/
 });
 
-function searchCustomer(id) {
+/!*function searchCustomer(id) {
     return customerDB.find(function (customer) {
         return customer.id == id;
     });
@@ -58,28 +66,44 @@ function updateCustomer() {
 
 $(`#getAllCustomer`).click(function () {
     getAll();
-});
+});*!/
 
 
 function getAll() {
 
     $(`#body`).empty();
 
-    for (const customer of customerDB) {
+    $.ajax({
+        url: baseUrl + "customer",
+        type: "get",
+        dataType: "json",
+        success: function (resp) {
+            $(`#body`).empty();
+            console.log(resp.message)
+            console.log(resp)
+            for (const customer of resp.data) {
 
-        $(`#body`).append(`<tr>
-                                <td>${customer.id}</td>
-                                <td>${customer.name}</td>
+                $(`#body`).append(`<tr>
+                                <td>${customer.cusId}</td>
+                                <td>${customer.cusName}</td>
                                 <td>${customer.address}</td>
-                                <td>${customer.tp}</td>
-                                <td><button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
+                                <td>${customer.salary}</td>
+                                <td><button type="button" class="btn btn-primary btn-sm me-2 btnEdit" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal2">
                                     Edit
                                 </button>
                                 <button class="btn btn-danger me-3 btn-sm delete">Delete</button></td>
-                   
+
                              </tr>`);
-    }
+
+            }
+
+        },
+        error: function (err) {
+            let parse = JSON.parse(err.responseText);
+            alert(parse.message);
+        }
+    })
 
     setEvent();
 }
@@ -102,7 +126,7 @@ function setEvent() {
 
     });
 
-    $('.delete').click(function () {
+  /!*  $('.delete').click(function () {
         $(`#tblCustomer tr`).click(function () {
 
             var $row = $(this).closest("tr");        // Finds the closest row <tr>
@@ -111,19 +135,19 @@ function setEvent() {
             if (searchCustomer($tds.text()) === undefined) {
                 alert("No such Customer..please check the ID");
             } else {
-                if (deleteFunc($tds.text())){
+                if (deleteFunc($tds.text())) {
                     // $(this).closest("tr").remove();
                     alert("customer Deleted !");
                     getAll();
                 }
             }
         });
-    });
+    });*!/
 
 
 }
 
-$('.delete').click(function () {
+/!*$('.delete').click(function () {
     $(`#tblCustomer tr`).click(function () {
 
         var $row = $(this).closest("tr");        // Finds the closest row <tr>
@@ -132,16 +156,16 @@ $('.delete').click(function () {
         if (searchCustomer($tds.text()) === undefined) {
             alert("No such Customer..please check the ID");
         } else {
-            if (deleteFunc($tds.text())){
+            if (deleteFunc($tds.text())) {
                 // $(this).closest("tr").remove();
                 alert("customer Deleted !");
                 getAll();
             }
         }
     });
-});
+});*!/
 
-function deleteFunc(id){
+function deleteFunc(id) {
     for (let i = 0; i < customerDB.length; i++) {
         if (customerDB[i].id == id) {
             customerDB.splice(i, 1);
@@ -168,11 +192,11 @@ $(`#tblCustomer tr`).click(function () {
 
 });
 
-$('#txtSearch').on('keyup',function (){
+$('#txtSearch').on('keyup', function () {
 
     let txtVal = $('#txtSearch');
 
-    if (txtVal.val() === ''){
+    if (txtVal.val() === '') {
         getAll();
     }
 
@@ -190,7 +214,7 @@ $('#txtSearch').on('keyup',function (){
                                     Edit
                                 </button>
                                 <button class="btn btn-danger me-3 btn-sm delete">Delete</button></td>
-                   
+
                              </tr>`));
             }
         } else {
@@ -206,12 +230,158 @@ $('#txtSearch').on('keyup',function (){
                                     Edit
                                 </button>
                                 <button class="btn btn-danger me-3 btn-sm delete">Delete</button></td>
-                   
+
                              </tr>`));
             }
         }
     }
 });
 
+
+getAll();*/
+
+$(".btnEdit").on('click', () => {
+    console.log("edit")
+});
+
+$('#save-customer').on('click', function () {
+    $.ajax({
+        url: baseUrl + "customer",
+        type: "post",
+        dataType: "json",
+        data: {
+            id: $('#customer-gmail').val(),
+            name: $('#customer-name').val(),
+            address: $('#customer-address').val(),
+            salary: $('#customer-tp').val()
+        },
+        success: function (res) {
+            getAll();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: res.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function (err) {
+            let parse = JSON.parse(err.responseText);
+            alert(parse.message);
+        }
+    });
+});
+
+function getAll() {
+
+    $(`#body`).empty();
+
+    $.ajax({
+        url: baseUrl + "customer",
+        type: "get",
+        dataType: "json",
+        success: function (resp) {
+            $(`#body`).empty();
+            for (const customer of resp.data) {
+                $(`#body`).append(`<tr>
+                                <td>${customer.cusId}</td>
+                                <td>${customer.cusName}</td>
+                                <td>${customer.address}</td>
+                                <td>${customer.salary}</td>
+                                <td><button type="button" class="btn btn-primary btn-sm me-2 btnEdit" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger me-3 btn-sm delete">Delete</button></td>
+
+                             </tr>`);
+
+            }
+            $(".btnEdit").on('click', function () {
+                var $row = $(this).closest("tr");
+                $tds = $row.find("td:nth-child(1)");
+                $ts = $row.find("td:nth-child(2)");
+                $tt = $row.find("td:nth-child(3)");
+                $tf = $row.find("td:nth-child(4)");
+                $(`#upCID`).val($tds.text());
+                $(`#upCID`).prop('disabled', true);
+                $(`#upCName`).val($ts.text());
+                $(`#upCAddress`).val($tt.text());
+                $(`#upCTp`).val($tf.text());
+            });
+
+            $('.delete').on('click', function () {
+                var $row = $(this).closest("tr");
+                $tds = $row.find("td:nth-child(1)");
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: baseUrl + "customer?id=" + $tds.text(),
+                            type: "delete",
+                            dataType: "json",
+                            success: function (res) {
+                                getAll();
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: res.message,
+                                    icon: "success"
+                                });
+                            },
+                            error: function (err) {
+                                let parse = JSON.parse(err.responseText);
+                                alert(parse.message);
+                            }
+                        });
+                    }
+                });
+
+            });
+        },
+        error: function (err) {
+            let parse = JSON.parse(err.responseText);
+            alert(parse.message);
+        }
+    })
+}
+
+$('#updateCustomer').on('click', function () {
+    const customer = {
+        id: $(`#upCID`).val(),
+        name: $(`#upCName`).val(),
+        address: $(`#upCAddress`).val(),
+        salary: parseInt($(`#upCTp`).val())
+    }
+
+
+    $.ajax({
+        url: baseUrl + "customer",
+        type: "put",
+        dataType: "json",
+        data: JSON.stringify(customer),
+        success: function (res) {
+            // alert(res.message)
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: res.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            getAll();
+        },
+        error: function (err) {
+            alert("Bad Request !")
+        }
+    })
+});
 
 getAll();

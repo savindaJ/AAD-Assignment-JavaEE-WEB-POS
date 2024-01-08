@@ -139,13 +139,13 @@ function setBtn() {
     }
 
     let id = $("#upCID").val();
-    if (searchCustomer(id) == undefined) {
+    /*if (searchCustomer(id) == undefined) {
         // $("#btnCusDelete").prop("disabled", true);
         $("#updateCustomer").prop("disabled", true);
     } else {
         // $(".delete").prop("disabled", false);
         $("#updateCustomer").prop("disabled", false);
-    }
+    }*/
 
 }
 

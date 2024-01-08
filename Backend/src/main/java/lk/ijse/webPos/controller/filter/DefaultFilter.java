@@ -16,7 +16,7 @@ import java.io.IOException;
 public class DefaultFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        Configure.getInstance().getSession();
+//        Configure.getInstance().getSession();
         System.out.println("Init Filter !");
     }
 
