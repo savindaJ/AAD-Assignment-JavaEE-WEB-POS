@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : savindaJ
@@ -21,14 +20,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Customer implements Serializable {
     @Id
-    @Column(name = "customer_id" ,length = 50)
+    @Column(name = "customer_id", length = 50)
     private String cusId;
-    @Column(name = "customer_name" ,length = 50)
+    @Column(name = "customer_name", length = 50)
     private String name;
-    @Column(name = "customer_address" ,length = 50)
+    @Column(name = "customer_address", length = 50)
     private String address;
     @Column(name = "customer_salary")
     private Double salary;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer")
+    private List<Orders> orders = new ArrayList<>();
 
     public Customer(String cusId, String name, String address, Double salary) {
         this.cusId = cusId;
