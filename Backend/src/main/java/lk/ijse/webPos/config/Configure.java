@@ -17,22 +17,13 @@ public class Configure {
     private static final SessionFactory factory;
 
     static {
-        Configuration configuration = new Configuration();
-        Properties properties = new Properties();
-
-        try {
-            properties.load(ClassLoader.getSystemClassLoader().getResourceAsStream("hibernate.Properties"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        configuration
+        factory = new Configuration()
+                .configure()
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Item.class)
                 .addAnnotatedClass(Orders.class)
-                .addAnnotatedClass(OrderDetail.class);
-
-        factory=configuration.setProperties(properties).buildSessionFactory();
+                .addAnnotatedClass(OrderDetail.class)
+                .buildSessionFactory();
     }
 
     private Configure(){}

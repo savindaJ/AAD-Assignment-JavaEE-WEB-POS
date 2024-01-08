@@ -1,5 +1,7 @@
 package lk.ijse.webPos.dao;
 
+import org.hibernate.Session;
+
 import java.util.List;
 
 /**
@@ -13,4 +15,5 @@ public interface CrudDAO <T,J> extends SuperDAO{
     boolean delete(J id);
     List<T> getAll();
     T getItem(J id);
+    void setSession(Session session);
 }

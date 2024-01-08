@@ -10,7 +10,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.CustomerBO;
+import lk.ijse.webPos.config.Configure;
 import lk.ijse.webPos.dto.CustomerDTO;
+import lk.ijse.webPos.entity.Customer;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
 
@@ -19,13 +25,14 @@ import java.io.IOException;
  * @date : 1/8/2024
  * @since : 0.1.0
  **/
-@WebServlet(urlPatterns = "/customer" ,loadOnStartup = 1)
+@WebServlet(urlPatterns = "/customer", loadOnStartup = 1)
 public class CustomerServlet extends HttpServlet {
 
     private CustomerBO customerBO;
 
     @Override
     public void init() throws ServletException {
+        Configure.getInstance().getSession();
         customerBO = BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
     }
 
@@ -33,8 +40,10 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println(customerBO);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
         String id = jsonObject.getString("id");
@@ -44,6 +53,6 @@ public class CustomerServlet extends HttpServlet {
 
         boolean save = customerBO.saveCustomer(new CustomerDTO(id,name,address,salary));
 
-        resp.getWriter().println("sample");
+        resp.getWriter().println("save");
     }
 }
