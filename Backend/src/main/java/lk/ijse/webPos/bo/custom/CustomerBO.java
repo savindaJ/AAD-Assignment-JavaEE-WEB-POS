@@ -1,6 +1,7 @@
 package lk.ijse.webPos.bo.custom;
 
 import lk.ijse.webPos.bo.SuperBO;
+import lk.ijse.webPos.dto.CustomerDTO;
 
 /**
  * @author : savindaJ
@@ -8,4 +9,5 @@ import lk.ijse.webPos.bo.SuperBO;
  * @since : 0.1.0
  **/
 public interface CustomerBO extends SuperBO {
+    boolean saveCustomer(CustomerDTO customerDTO);
 }

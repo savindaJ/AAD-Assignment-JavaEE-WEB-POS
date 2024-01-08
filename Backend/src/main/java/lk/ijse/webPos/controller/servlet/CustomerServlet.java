@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.CustomerBO;
+import lk.ijse.webPos.dto.CustomerDTO;
 
 import java.io.IOException;
 
@@ -34,11 +35,15 @@ public class CustomerServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*JsonReader reader = Json.createReader(req.getReader());
+        JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
         String id = jsonObject.getString("id");
-        System.out.println(id);
+        String name = jsonObject.getString("name");
+        String address = jsonObject.getString("address");
+        Double salary = Double.valueOf(String.valueOf(jsonObject.getJsonNumber("salary")));
 
-        resp.getWriter().println("sample");*/
+        boolean save = customerBO.saveCustomer(new CustomerDTO(id,name,address,salary));
+
+        resp.getWriter().println("sample");
     }
 }
