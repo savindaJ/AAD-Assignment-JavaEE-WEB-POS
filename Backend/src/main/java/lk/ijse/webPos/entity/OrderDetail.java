@@ -1,6 +1,8 @@
 package lk.ijse.webPos.entity;
 
 import lk.ijse.webPos.embedded.OrderDetailPK;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -11,6 +13,9 @@ import javax.persistence.*;
  **/
 @Entity
 @Table(name = "order_detail")
+@Data
+@AllArgsConstructor
+@NamedEntityGraph
 public class OrderDetail {
     @EmbeddedId
     private OrderDetailPK orderDetailPK;
@@ -24,4 +29,8 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "item_code",referencedColumnName = "item_code",insertable = false,updatable = false)
     private Item item;
+
+    public OrderDetail() {
+
+    }
 }

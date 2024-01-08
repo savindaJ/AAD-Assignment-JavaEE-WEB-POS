@@ -1,5 +1,7 @@
 package lk.ijse.webPos.entity;
 
+import lombok.AllArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  **/
 @Entity
 @Table(name = "Item")
+@AllArgsConstructor
 public class Item {
     @Id
     @Column(name = "item_code" ,length = 50)
@@ -24,4 +27,8 @@ public class Item {
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "item")
     private List<OrderDetail> orderDetails = new ArrayList<>();
+
+    public Item() {
+
+    }
 }
