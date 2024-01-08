@@ -1,7 +1,9 @@
 package lk.ijse.webPos.bo.custom.impl;
 
 import lk.ijse.webPos.bo.custom.CustomerBO;
+import lk.ijse.webPos.config.Configure;
 import lk.ijse.webPos.dto.CustomerDTO;
+import org.hibernate.Session;
 
 /**
  * @author : savindaJ
@@ -11,6 +13,8 @@ import lk.ijse.webPos.dto.CustomerDTO;
 public class CustomerBOImpl implements CustomerBO {
     @Override
     public boolean saveCustomer(CustomerDTO customerDTO) {
+        Session session = Configure.getInstance().getSession();
+        System.out.println(session);
         System.out.println(customerDTO);
         return false;
     }
