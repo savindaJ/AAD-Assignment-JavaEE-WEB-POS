@@ -8,14 +8,8 @@ import org.hibernate.cfg.Configuration;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * @author : savindaJ
- * @date : 1/8/2024
- * @since : 0.1.0
- **/
 public class Configure {
     private static Configure configure;
-
     private static final SessionFactory factory;
 
     static {
@@ -28,11 +22,13 @@ public class Configure {
             throw new RuntimeException(e);
         }
 
-        configuration.
-                addAnnotatedClass(Customer.class);
+        configuration
+                .addAnnotatedClass(Customer.class);
 
         factory=configuration.setProperties(properties).buildSessionFactory();
     }
+
+    private Configure(){}
 
     public static Configure getInstance(){
         return configure == null ? new Configure() : configure;

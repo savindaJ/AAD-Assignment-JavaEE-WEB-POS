@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @author : savindaJ
@@ -15,18 +16,24 @@ import javax.persistence.Table;
  * @since : 0.1.0
  **/
 @Entity
-@Table(schema = "customer")
-@AllArgsConstructor
+@Table(name = "customer")
 @Data
 @NoArgsConstructor
-public class Customer {
+public class Customer implements Serializable {
     @Id
-    @Column(name = "customer_id")
+    @Column(name = "customer_id" ,length = 50)
     private String cusId;
-    @Column(name = "customer_name")
+    @Column(name = "customer_name" ,length = 50)
     private String name;
-    @Column(name = "customer_address")
+    @Column(name = "customer_address" ,length = 50)
     private String address;
     @Column(name = "customer_salary")
     private Double salary;
+
+    public Customer(String cusId, String name, String address, Double salary) {
+        this.cusId = cusId;
+        this.name = name;
+        this.address = address;
+        this.salary = salary;
+    }
 }

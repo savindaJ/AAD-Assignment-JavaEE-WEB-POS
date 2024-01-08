@@ -1,5 +1,8 @@
 import lk.ijse.webPos.config.Configure;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.io.Serializable;
 
 /**
  * @author : savindaJ
@@ -9,6 +12,5 @@ import org.hibernate.Session;
 public class Test {
     public static void main(String[] args) {
         Session session = Configure.getInstance().getSession();
-        System.out.println(session);
     }
 }
