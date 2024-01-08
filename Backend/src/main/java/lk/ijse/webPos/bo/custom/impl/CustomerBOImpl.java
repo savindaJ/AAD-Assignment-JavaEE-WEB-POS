@@ -26,4 +26,15 @@ public class CustomerBOImpl implements CustomerBO {
                 customerDTO.getSalary()
         ));
     }
+
+    @Override
+    public boolean updateCustomer(CustomerDTO customerDTO) {
+        customerDAO.setSession(Configure.getInstance().getSession());
+        return customerDAO.update(new Customer(
+                customerDTO.getCusId(),
+                customerDTO.getCusName(),
+                customerDTO.getAddress(),
+                customerDTO.getSalary()
+        ));
+    }
 }

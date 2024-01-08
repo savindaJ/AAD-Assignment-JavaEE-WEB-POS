@@ -10,4 +10,6 @@ import lk.ijse.webPos.dto.CustomerDTO;
  **/
 public interface CustomerBO extends SuperBO {
     boolean saveCustomer(CustomerDTO customerDTO);
+
+    boolean updateCustomer(CustomerDTO customerDTO);
 }

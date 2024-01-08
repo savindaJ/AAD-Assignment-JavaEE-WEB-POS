@@ -4,7 +4,9 @@ import lk.ijse.webPos.config.Configure;
 import lk.ijse.webPos.dao.custom.CustomerDAO;
 import lk.ijse.webPos.entity.Customer;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,14 +20,22 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean save(Customer entity) {
-        System.out.println(entity);
-        System.out.println(session);
-        return true;
+        Transaction transaction = session.beginTransaction();
+        Serializable save = session.save(entity);
+        transaction.commit();
+        return save!=null;
     }
 
     @Override
-    public boolean update(Customer dto) {
-        return false;
+    public boolean update(Customer entity) {
+       try {
+           Transaction transaction = session.beginTransaction();
+           session.update(entity);
+           transaction.commit();
+           return true;
+       }catch (Exception e){
+           return false;
+       }
     }
 
     @Override
