@@ -23,24 +23,32 @@ public class CustomerDAOImpl implements CustomerDAO {
         Transaction transaction = session.beginTransaction();
         Serializable save = session.save(entity);
         transaction.commit();
-        return save!=null;
+        return save != null;
     }
 
     @Override
     public boolean update(Customer entity) {
-       try {
-           Transaction transaction = session.beginTransaction();
-           session.update(entity);
-           transaction.commit();
-           return true;
-       }catch (Exception e){
-           return false;
-       }
+        try {
+            Transaction transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+        try {
+            Transaction transaction = session.beginTransaction();
+            Customer customer = session.get(Customer.class, id);
+            session.delete(customer);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

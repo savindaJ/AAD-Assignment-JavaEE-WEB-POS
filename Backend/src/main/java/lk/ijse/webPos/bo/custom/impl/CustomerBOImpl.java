@@ -37,4 +37,10 @@ public class CustomerBOImpl implements CustomerBO {
                 customerDTO.getSalary()
         ));
     }
+
+    @Override
+    public boolean deleteCustomer(String id) {
+        customerDAO.setSession(Configure.getInstance().getSession());
+        return customerDAO.delete(id);
+    }
 }

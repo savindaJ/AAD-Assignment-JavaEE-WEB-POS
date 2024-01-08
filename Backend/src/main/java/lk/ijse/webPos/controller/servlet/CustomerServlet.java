@@ -49,7 +49,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (setValues(req)){
+        if (setValues(req)) {
             if (customerBO.saveCustomer(new CustomerDTO(id, name, address, salary))) {
                 RespMessage<Customer> message = new RespMessage<>();
                 String ok = message.createMassage("OK", "Customer Saved Successfully !", null);
@@ -75,21 +75,21 @@ public class CustomerServlet extends HttpServlet {
             address = jsonObject.getString("address");
             salary = Double.valueOf(String.valueOf(jsonObject.getJsonNumber("salary")));
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (setValues(req)){
-            if (customerBO.updateCustomer(new CustomerDTO(id,name,address,salary))){
+        if (setValues(req)) {
+            if (customerBO.updateCustomer(new CustomerDTO(id, name, address, salary))) {
                 RespMessage<Customer> message = new RespMessage<>();
                 String ok = message.createMassage("OK", "Customer Updated Successfully !", null);
                 resp.setContentType("application/json");
                 resp.setStatus(HttpServletResponse.SC_CREATED);
                 resp.getWriter().println(ok);
-            }else {
+            } else {
                 RespMessage<Customer> message = new RespMessage<>();
                 String ok = message.createMassage("NOT", "Customer Not Updated !", null);
                 resp.setContentType("application/json");
@@ -97,5 +97,26 @@ public class CustomerServlet extends HttpServlet {
                 resp.getWriter().println(ok);
             }
         }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        JsonReader reader = Json.createReader(req.getReader());
+        JsonObject jsonObject = reader.readObject();
+        id = jsonObject.getString("id");
+        if (customerBO.deleteCustomer(id)) {
+            RespMessage<Customer> message = new RespMessage<>();
+            String ok = message.createMassage("OK", "Customer Delete Successfully !", null);
+            resp.setContentType("application/json");
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.getWriter().println(ok);
+        } else {
+            RespMessage<Customer> message = new RespMessage<>();
+            String ok = message.createMassage("NOT", "Customer Not Deleted !", null);
+            resp.setContentType("application/json");
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().println(ok);
+        }
+
     }
 }
