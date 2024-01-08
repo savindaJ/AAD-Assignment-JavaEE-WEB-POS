@@ -6,6 +6,8 @@ import lk.ijse.webPos.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         Transaction transaction = session.beginTransaction();
         Serializable save = session.save(entity);
         transaction.commit();
+        session.close();
         return save != null;
     }
 
@@ -35,6 +38,8 @@ public class CustomerDAOImpl implements CustomerDAO {
             return true;
         } catch (Exception e) {
             return false;
+        }finally {
+            session.close();
         }
     }
 
@@ -48,12 +53,21 @@ public class CustomerDAOImpl implements CustomerDAO {
             return true;
         } catch (Exception e) {
             return false;
+        }finally {
+            session.close();
         }
     }
 
     @Override
     public List<Customer> getAll() {
-        return null;
+        Transaction transaction = session.beginTransaction();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Customer> query = criteriaBuilder.createQuery(Customer.class);
+        query.from(Customer.class);
+        List<Customer> resultList = session.createQuery(query).getResultList();
+        transaction.commit();
+        session.close();
+        return resultList;
     }
 
     @Override

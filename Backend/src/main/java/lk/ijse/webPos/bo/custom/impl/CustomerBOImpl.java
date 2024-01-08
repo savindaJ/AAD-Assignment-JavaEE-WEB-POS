@@ -8,6 +8,9 @@ import lk.ijse.webPos.dto.CustomerDTO;
 import lk.ijse.webPos.entity.Customer;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author : savindaJ
  * @date : 1/8/2024
@@ -42,5 +45,20 @@ public class CustomerBOImpl implements CustomerBO {
     public boolean deleteCustomer(String id) {
         customerDAO.setSession(Configure.getInstance().getSession());
         return customerDAO.delete(id);
+    }
+
+    @Override
+    public ArrayList<CustomerDTO> getAllCustomers() {
+        customerDAO.setSession(Configure.getInstance().getSession());
+        ArrayList<CustomerDTO> list = new ArrayList<>();
+        for (Customer customer : customerDAO.getAll()) {
+            list.add(new CustomerDTO(
+                    customer.getCusId(),
+                    customer.getName(),
+                    customer.getAddress(),
+                    customer.getSalary()
+            ));
+        }
+        return list;
     }
 }

@@ -10,16 +10,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.CustomerBO;
-import lk.ijse.webPos.config.Configure;
 import lk.ijse.webPos.dto.CustomerDTO;
 import lk.ijse.webPos.entity.Customer;
 import lk.ijse.webPos.util.RespMessage;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author : savindaJ
@@ -38,30 +34,38 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        Configure.getInstance().getSession();
         customerBO = BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(customerBO);
+        ArrayList<CustomerDTO> list = customerBO.getAllCustomers();
+        RespMessage<CustomerDTO> message = new RespMessage<>();
+        String ok;
+        resp.setContentType("application/json");
+        if (list != null) {
+            ok = message.createMassage("OK", "Customer Saved Successfully !", list);
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+        } else {
+            ok = message.createMassage("NOT", "Customer Not Saved !", null);
+        }
+        resp.getWriter().write(ok);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (setValues(req)) {
+            String ok;
+            RespMessage<Customer> message = new RespMessage<>();
             if (customerBO.saveCustomer(new CustomerDTO(id, name, address, salary))) {
-                RespMessage<Customer> message = new RespMessage<>();
-                String ok = message.createMassage("OK", "Customer Saved Successfully !", null);
-                resp.setContentType("application/json");
+                ok = message.createMassage("OK", "Customer Saved Successfully !", null);
                 resp.setStatus(HttpServletResponse.SC_CREATED);
-                resp.getWriter().println(ok);
             } else {
-                RespMessage<Customer> message = new RespMessage<>();
-                String ok = message.createMassage("NOT", "Customer Not Saved !", null);
-                resp.setContentType("application/json");
-                resp.getWriter().println(ok);
+                ok = message.createMassage("NOT", "Customer Not Saved !", null);
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
+            resp.setContentType("application/json");
+            resp.getWriter().write(ok);
         }
 
     }
@@ -83,19 +87,17 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (setValues(req)) {
+            RespMessage<Customer> message = new RespMessage<>();
+            String ok;
             if (customerBO.updateCustomer(new CustomerDTO(id, name, address, salary))) {
-                RespMessage<Customer> message = new RespMessage<>();
-                String ok = message.createMassage("OK", "Customer Updated Successfully !", null);
-                resp.setContentType("application/json");
+                ok = message.createMassage("OK", "Customer Updated Successfully !", null);
                 resp.setStatus(HttpServletResponse.SC_CREATED);
-                resp.getWriter().println(ok);
             } else {
-                RespMessage<Customer> message = new RespMessage<>();
-                String ok = message.createMassage("NOT", "Customer Not Updated !", null);
-                resp.setContentType("application/json");
+                ok = message.createMassage("NOT", "Customer Not Updated !", null);
                 resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                resp.getWriter().println(ok);
             }
+            resp.setContentType("application/json");
+            resp.getWriter().write(ok);
         }
     }
 
@@ -104,19 +106,16 @@ public class CustomerServlet extends HttpServlet {
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
         id = jsonObject.getString("id");
+        RespMessage<Customer> message = new RespMessage<>();
+        String ok;
         if (customerBO.deleteCustomer(id)) {
-            RespMessage<Customer> message = new RespMessage<>();
-            String ok = message.createMassage("OK", "Customer Delete Successfully !", null);
-            resp.setContentType("application/json");
+            ok = message.createMassage("OK", "Customer Delete Successfully !", null);
             resp.setStatus(HttpServletResponse.SC_CREATED);
-            resp.getWriter().println(ok);
         } else {
-            RespMessage<Customer> message = new RespMessage<>();
-            String ok = message.createMassage("NOT", "Customer Not Deleted !", null);
-            resp.setContentType("application/json");
+            ok = message.createMassage("NOT", "Customer Not Deleted !", null);
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().println(ok);
         }
-
+        resp.setContentType("application/json");
+        resp.getWriter().write(ok);
     }
 }
