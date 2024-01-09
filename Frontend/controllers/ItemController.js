@@ -132,7 +132,9 @@ function getAllItem() {
         url: baseUrl + "item", type: 'get', dataType: 'json', success: function (res) {
             allItem = res.data;
             itemDB = res.data;
-            setItemIds(itemDB)
+            setItemIds(itemDB);
+            $('#Item-body').empty();
+
             for (const item of res.data) {
                 $(`#Item-body`).append(`<tr>
                                 <td>${item.itemCode}</td>
