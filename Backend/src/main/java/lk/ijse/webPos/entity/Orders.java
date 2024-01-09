@@ -1,5 +1,9 @@
 package lk.ijse.webPos.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,6 +16,9 @@ import java.util.List;
  **/
 @Entity
 @Table(name = "orders")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Orders {
     @Id
     @Column(name = "order_id",length = 50)
