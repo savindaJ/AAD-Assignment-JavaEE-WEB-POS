@@ -1,12 +1,5 @@
-//you can store data like as follows
-var customerDB = [
-    {id: "C00-001", name: "Sachin Thamalsha", address: "Mathara", tp: "0716582439"},
-    {id: "C00-002", name: "Ranjith Perera", address: "Panadura", tp: "0702546896"},
-    {id: "C00-003", name: "Kavindu Perera", address: "Panadura", tp: "0764285632"}
-];
-
+var customerDB = [];
 var itemDB = [];
-
 var orderDB = [
     /*{
         oid: "OID-001",
@@ -18,5 +11,4 @@ var orderDB = [
         ]
     }*/
 ];
-
 let baseUrl ="http://192.168.38.174:8080/app/";
