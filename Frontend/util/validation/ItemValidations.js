@@ -117,8 +117,8 @@ function setItemBtn() {
 }
 
 function searchItemValid(id) {
-    return itemDB.find(function (item) {
-        return item.code == id;
+    return allItem.find(function (item) {
+        return item.itemCode == id;
     });
 }
 

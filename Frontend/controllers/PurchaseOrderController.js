@@ -89,6 +89,7 @@ $('#btnAddOrder').on('click', function () {
 
     let totalList = $(`#order-tbl-body > tr > td:nth-child(5)`);
 
+    finalTotal = 0;
 
     for (const total of totalList) {
         finalTotal += parseFloat($(total).text());
