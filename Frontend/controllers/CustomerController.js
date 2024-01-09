@@ -257,6 +257,7 @@ $('#save-customer').on('click', function () {
         },
         success: function (res) {
             getAll();
+            clearCustomerInputFields();
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -275,6 +276,8 @@ $('#save-customer').on('click', function () {
 function getAll() {
 
     $(`#body`).empty();
+
+    $(`#body`).append(`<tr><td>Loading !</td></tr>`);
 
     $.ajax({
         url: baseUrl + "customer",
