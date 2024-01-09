@@ -36,7 +36,7 @@ function getAllItems() {
 
 
 */
-
+let allItem;
 $('#btnUpdateItem').on('click',function (){
     updateItem();
 });
@@ -70,14 +70,32 @@ $('#btnSaveItem').on('click', function () {
 function saveItem() {
     let itemId = $('#txtItemId').val();
     if (searchItem(itemId.trim()) === undefined) {
-        item = {
-            code: $('#txtItemId').val(),
-            description: $('#txtItemdec').val(),
-            qtyOnHand: $('#txtItemQty').val(),
-            unitPrice: $('#txtItemUnitPrice').val()
-        }
-        itemDB.push(item);
-        getAllItem();
+        $.ajax({
+            url:baseUrl+"item",
+            type: 'post',
+            dataType: 'json',
+            data:{
+                itemCode: $('#txtItemId').val(),
+                description: $('#txtItemdec').val(),
+                unitPrice: $('#txtItemQty').val(),
+                qty: $('#txtItemUnitPrice').val()
+            },
+            success:function (res) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: res.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                getAllItem();
+            },
+            error:function (err) {
+                let parse = JSON.parse(err.responseText);
+                alert(parse.message);
+            }
+        })
+
     } else {
         alert('already exits Item id');
     }
@@ -85,7 +103,7 @@ function saveItem() {
 }
 
 function searchItem(id) {
-    return itemDB.find(function (item) {
+    return allItem.find(function (item) {
         return item.code === id;
     });
 }
@@ -98,27 +116,52 @@ $('#btnGetAllItem').on('click', function () {
 function getAllItem() {
     $('#Item-body').empty();
 
-    for (const item of itemDB) {
-        $(`#Item-body`).append(`<tr>
-                                <td>${item.code}</td>
+    $.ajax({
+       url: baseUrl+"item",
+       type: 'get',
+       dataType:'json',
+       success:function (res) {
+           allItem = res.data;
+           for (const item of res.data) {
+               $(`#Item-body`).append(`<tr>
+                                <td>${item.itemCode}</td>
                                 <td>${item.description}</td>
-                                <td>${item.unitPrice}</td>
-                                <td>${item.qtyOnHand}</td>
-                                <td><button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
+                                <td>${item.price}</td>
+                                <td>${item.quantity}</td>
+                                <td><button type="button" class="btn btn-primary btn-sm me-2 btnUpdate" data-bs-toggle="modal"
                                         data-bs-target="#update-model">
                                     Edit
                                 </button>
                                 <button class="btn btn-danger me-3 btn-sm deleteItem">Delete</button></td>
                    
                              </tr>`);
-    }
+           }
+           $(`.btnUpdate`).on('click',function () {
+               var $row = $(this).closest("tr");
+               $tds = $row.find("td:nth-child(1)");
+               $ts = $row.find("td:nth-child(2)");
+               $tt = $row.find("td:nth-child(3)");
+               $tf = $row.find("td:nth-child(4)");
+               // let td_list =  $();
+
+               $(`#upItemId`).val($tds.text());
+               $(`#upItemdesc`).val($ts.text());
+               $(`#upUnitPrice`).val($tt.text());
+               $(`#upQty`).val($tf.text());
+
+           });
+       } ,
+        error:function (err) {
+
+        }
+    });
     setEvent();
 }
 
 
 function setEvent() {
 
-    $(`#tblItem tr`).click(function () {
+    $(`.btnUpdate`).on('click',function () {
 
         var $row = $(this).closest("tr");
         $tds = $row.find("td:nth-child(1)");
@@ -164,25 +207,23 @@ function deleteItem(id) {
 }
 
 $('#txtSearchItem').on('keyup',function (){
-
-
-
     let txtVal = $('#txtSearchItem');
 
     if (txtVal.val() === ''){
+        $(`#Item-body`).empty();
         getAllItem();
     }
     $(`#Item-body`).empty();
 
-    for (let item of itemDB) {
+    for (let item of allItem) {
         if ($("#itemSearch").val() === "Code") {
             if (item.code.indexOf($("#txtSearchItem").val()) !== -1) {
 
                 $("#tblItem > tbody").append($(`#Item-body`).append(`<tr>
-                                <td>${item.code}</td>
+                                 <td>${item.itemCode}</td>
                                 <td>${item.description}</td>
-                                <td>${item.unitPrice}</td>
-                                <td>${item.qtyOnHand}</td>
+                                <td>${item.price}</td>
+                                <td>${item.quantity}</td>
                                 <td><button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
                                         data-bs-target="#update-model">
                                     Edit
@@ -195,10 +236,10 @@ $('#txtSearchItem').on('keyup',function (){
             if (item.description.indexOf($("#txtSearchItem").val()) !== -1) {
 
                 $("#tblItem > tbody").append($(`#Item-body`).append(`<tr>
-                                <td>${item.code}</td>
+                                <td>${item.itemCode}</td>
                                 <td>${item.description}</td>
-                                <td>${item.unitPrice}</td>
-                                <td>${item.qtyOnHand}</td>
+                                <td>${item.price}</td>
+                                <td>${item.quantity}</td>
                                 <td><button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
                                         data-bs-target="#update-model">
                                     Edit
