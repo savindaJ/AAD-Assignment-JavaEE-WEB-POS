@@ -82,6 +82,9 @@ nav_home.addEventListener("click", function () {
 
 nav_order.addEventListener("click", function () {
 
+    getAllItem();
+    getAll();
+
     nav_customer_txt.style.fontSize = `20px`;
     nav_customer_txt.style.color = `black`;
 

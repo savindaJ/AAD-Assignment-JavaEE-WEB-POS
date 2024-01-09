@@ -1,5 +1,9 @@
 let today = new Date().toISOString().slice(0, 10);
 
+let customers;
+
+let items;
+
 $('#txtDate').css({
     color: 'green',
     fontWeight: '500'
@@ -56,6 +60,11 @@ $('#btnPlaceOrder').on('click', function () {
 
 $('#btnAddOrder').on('click', function () {
 
+    if ($('#getQty').val()===""){
+        alert("empty value in hear !")
+        return
+    }
+
     let price = parseFloat($('#orderItemPrice').val());
 
     let total = price * parseInt($('#getQty').val());
@@ -96,42 +105,29 @@ $('#btnAddOrder').on('click', function () {
     $('#btnAddOrder').prop("disabled", true);
 });
 
-function loadCustomerId() {
-    for (const customer of customerDB) {
-        $('#selCusId').append(`<option>${customer.id}</option>`);
-    }
-}
-
 $('#selCusId').on('change', function () {
     let id = $('#selCusId').val();
-    for (const customer of customerDB) {
-        if (customer.id == id) {
-            $('#orderCusName').val(customer.name);
-            $('#orderCusAddres').val(customer.address);
-            $('#orderCusTp').val(customer.tp);
+    for (const cus of customers) {
+        if (cus.cusId === id) {
+            $('#orderCusName').val(cus.cusName);
+            $('#orderCusAddres').val(cus.address);
+            $('#orderCusTp').val(cus.salary);
         }
     }
     $('#selItemId').focus();
 });
 
 
-function loadAllItemId() {
-    for (const item of itemDB) {
-        $('#selItemId').append(`<option>${item.code}</option>`)
-    }
-}
-
 $('#selItemId').on('change', function () {
     let id = $('#selItemId').val();
-    for (const item of itemDB) {
-        if (item.code == id) {
+    for (const item of items) {
+        if (item.itemCode === id) {
             $('#orderItemDesc').val(item.description);
-            $('#orderItemPrice').val(item.unitPrice);
-            $('#orderQty').val(item.qtyOnHand);
+            $('#orderItemPrice').val(item.price);
+            $('#orderQty').val(item.quantity);
         }
     }
     $('#getQty').focus();
-
     $('#btnAddOrder').prop("disabled", false);
 
 });
@@ -149,9 +145,21 @@ $('#txtDiscount').on('keyup change', function () {
 
 $('#txtDiscount').val(0);
 
-$('#selCusId').prop('disabled',true);
+$('#selCusId').prop('disabled', true);
 
-loadAllItemId();
+function setItemIds(come) {
+    items = come;
+    $('#selItemId').empty();
+    for (const item of come) {
+        $('#selItemId').append(`<option>${item.itemCode}</option>`)
+    }
+}
 
-loadCustomerId();
+function loadCusIds(ids) {
+    customers = ids;
+    $('#selCusId').empty();
+    for (const customer of ids) {
+        $('#selCusId').append(`<option>${customer.cusId}</option>`);
+    }
+}
 

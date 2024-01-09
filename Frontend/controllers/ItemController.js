@@ -119,9 +119,20 @@ $('#btnGetAllItem').on('click', function () {
 function getAllItem() {
     $('#Item-body').empty();
 
+    $(`#Item-body`).append(`<tr>
+                                <td>Loading !</td>
+                                <td>Loading !</td>
+                                <td>Loading !</td>
+                                <td>Loading !</td>
+                                <td>Loading !</td>
+                   
+                             </tr>`);
+
     $.ajax({
         url: baseUrl + "item", type: 'get', dataType: 'json', success: function (res) {
             allItem = res.data;
+            itemDB = res.data;
+            setItemIds(itemDB)
             for (const item of res.data) {
                 $(`#Item-body`).append(`<tr>
                                 <td>${item.itemCode}</td>
