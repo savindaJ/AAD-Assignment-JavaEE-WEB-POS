@@ -1,6 +1,7 @@
 package lk.ijse.webPos.bo;
 
 import lk.ijse.webPos.bo.custom.impl.CustomerBOImpl;
+import lk.ijse.webPos.bo.custom.impl.ItemBOImpl;
 
 /**
  * @author : savindaJ
@@ -18,13 +19,15 @@ public class BOFactory {
     }
 
     public enum BOTypes {
-        CUSTOMER
+        CUSTOMER,ITEM
     }
 
     public <T extends SuperBO> T getBO(BOTypes boTypes) {
         switch (boTypes) {
             case CUSTOMER:
                 return (T) new CustomerBOImpl();
+            case ITEM:
+                return (T) new ItemBOImpl();
             default:
                 return null;
         }
