@@ -385,6 +385,7 @@ $('#updateCustomer').on('click', function () {
                 timer: 1500
             });
             getAll();
+            clearUpdateFiald();
         },
         error: function (err) {
             alert("Bad Request !")
