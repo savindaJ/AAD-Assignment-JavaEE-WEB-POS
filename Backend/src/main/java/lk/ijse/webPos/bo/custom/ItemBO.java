@@ -1,6 +1,9 @@
 package lk.ijse.webPos.bo.custom;
 
 import lk.ijse.webPos.bo.SuperBO;
+import lk.ijse.webPos.dto.ItemDTO;
+
+import java.util.ArrayList;
 
 /**
  * @author : savindaJ
@@ -8,4 +11,5 @@ import lk.ijse.webPos.bo.SuperBO;
  * @since : 0.1.0
  **/
 public interface ItemBO extends SuperBO {
+    ArrayList<ItemDTO> getAllItems();
 }

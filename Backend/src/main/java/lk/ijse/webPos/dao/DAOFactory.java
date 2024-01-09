@@ -1,6 +1,7 @@
 package lk.ijse.webPos.dao;
 
 import lk.ijse.webPos.dao.custom.impl.CustomerDAOImpl;
+import lk.ijse.webPos.dao.custom.impl.ItemDAOImpl;
 
 import java.util.Stack;
 
@@ -20,13 +21,15 @@ public class DAOFactory {
     }
 
     public enum DAOTypes {
-        CUSTOMERDAO
+        CUSTOMERDAO,ITEMDAO, ORDERDAO, ORDERDETAILDAO, QUERYDAO
     }
 
     public <T extends SuperDAO> T getDAO(DAOTypes daoTypes) {
         switch (daoTypes) {
             case CUSTOMERDAO:
                 return (T) new CustomerDAOImpl();
+            case ITEMDAO:
+                return (T) new ItemDAOImpl();
             default:
                 return null;
         }
