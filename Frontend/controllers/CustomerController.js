@@ -277,7 +277,12 @@ function getAll() {
 
     $(`#body`).empty();
 
-    $(`#body`).append(`<tr><td>Loading !</td></tr>`);
+    $(`#body`).append(`<tr><td>Loading !</td>
+                        <td>Loading !</td>
+                        <td>Loading !</td>
+                        <td>Loading !</td>
+                        <td>Loading !</td>
+                        </tr>`);
 
     $.ajax({
         url: baseUrl + "customer",
