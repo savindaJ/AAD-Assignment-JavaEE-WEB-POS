@@ -12,4 +12,10 @@ import java.util.ArrayList;
  **/
 public interface ItemBO extends SuperBO {
     ArrayList<ItemDTO> getAllItems();
+
+    boolean saveItem(ItemDTO itemDTO) throws Exception;
+
+    boolean updateItem(ItemDTO itemDTO) throws Exception;
+
+    boolean deleteItem(String itemCode);
 }

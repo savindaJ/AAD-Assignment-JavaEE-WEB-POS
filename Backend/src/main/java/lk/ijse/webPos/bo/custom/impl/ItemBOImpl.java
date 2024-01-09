@@ -28,4 +28,32 @@ public class ItemBOImpl implements ItemBO {
         }
         return list;
     }
+
+    @Override
+    public boolean saveItem(ItemDTO itemDTO) throws Exception {
+        itemDAO.setSession(Configure.getInstance().getSession());
+        return itemDAO.save(new Item(
+                itemDTO.getItemCode(),
+                itemDTO.getDescription(),
+                itemDTO.getPrice(),
+                itemDTO.getQuantity())
+        );
+    }
+
+    @Override
+    public boolean updateItem(ItemDTO itemDTO) throws Exception {
+        itemDAO.setSession(Configure.getInstance().getSession());
+        return itemDAO.update(new Item(
+                itemDTO.getItemCode(),
+                itemDTO.getDescription(),
+                itemDTO.getPrice(),
+                itemDTO.getQuantity())
+        );
+    }
+
+    @Override
+    public boolean deleteItem(String itemCode) {
+        itemDAO.setSession(Configure.getInstance().getSession());
+        return itemDAO.delete(itemCode);
+    }
 }

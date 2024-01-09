@@ -21,18 +21,43 @@ public class ItemDAOImpl implements ItemDAO {
     private Session session;
 
     @Override
-    public boolean save(Item dto) {
-        return false;
+    public boolean save(Item entity) throws Exception {
+        try {
+            Transaction transaction = session.beginTransaction();
+            session.save(entity);
+            transaction.commit();
+            session.close();
+            return true;
+        }catch (Exception e) {
+            throw Exception.class.cast(e);
+        }
     }
 
     @Override
-    public boolean update(Item dto) {
-        return false;
+    public boolean update(Item entity) throws Exception {
+        try {
+            Transaction transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+            session.close();
+            return true;
+        }catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+        try {
+            Transaction transaction = session.beginTransaction();
+            Item item = session.get(Item.class, id);
+            session.delete(item);
+            transaction.commit();
+            session.close();
+            return true;
+        }catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override

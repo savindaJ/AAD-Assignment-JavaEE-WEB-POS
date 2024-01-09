@@ -60,11 +60,16 @@ public class CustomerServlet extends HttpServlet {
         salary = Double.valueOf(req.getParameter("salary"));
         String ok;
         RespMessage<Customer> message = new RespMessage<>();
-        if (customerBO.saveCustomer(new CustomerDTO(id, name, address, salary))) {
-            ok = message.createMassage("OK", "Customer Saved Successfully !", null);
-            resp.setStatus(HttpServletResponse.SC_CREATED);
-        } else {
-            ok = message.createMassage("NOT", "Customer Not Saved !", null);
+        try {
+            if (customerBO.saveCustomer(new CustomerDTO(id, name, address, salary))) {
+                ok = message.createMassage("OK", "Customer Saved Successfully !", null);
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                ok = message.createMassage("NOT", "Customer Not Saved !", null);
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            ok = message.createMassage("NOT", e.getLocalizedMessage(), null);
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         resp.setContentType("application/json");
@@ -91,11 +96,16 @@ public class CustomerServlet extends HttpServlet {
         if (setValues(req)) {
             RespMessage<Customer> message = new RespMessage<>();
             String ok;
-            if (customerBO.updateCustomer(new CustomerDTO(id, name, address, salary))) {
-                ok = message.createMassage("OK", "Customer Updated Successfully !", null);
-                resp.setStatus(HttpServletResponse.SC_CREATED);
-            } else {
-                ok = message.createMassage("NOT", "Customer Not Updated !", null);
+            try {
+                if (customerBO.updateCustomer(new CustomerDTO(id, name, address, salary))) {
+                    ok = message.createMassage("OK", "Customer Updated Successfully !", null);
+                    resp.setStatus(HttpServletResponse.SC_CREATED);
+                } else {
+                    ok = message.createMassage("NOT", "Customer Not Updated !", null);
+                    resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                }
+            } catch (Exception e) {
+                ok = message.createMassage("NOT", e.getLocalizedMessage(), null);
                 resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
             resp.setContentType("application/json");

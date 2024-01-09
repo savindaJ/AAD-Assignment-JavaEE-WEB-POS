@@ -30,7 +30,13 @@ public class Item {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "item")
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
-    public Item() {
+    Item() {
+    }
 
+    public Item(String itemCode, String description, Double price, Integer quantity) {
+        this.itemCode=itemCode;
+        this.description=description;
+        this.unitPrice=price;
+        this.qty=quantity;
     }
 }

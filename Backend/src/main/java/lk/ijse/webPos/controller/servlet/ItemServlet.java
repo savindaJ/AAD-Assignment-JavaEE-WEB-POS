@@ -1,5 +1,8 @@
 package lk.ijse.webPos.controller.servlet;
 
+import jakarta.json.Json;
+import jakarta.json.JsonNumber;
+import jakarta.json.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,11 +38,87 @@ public class ItemServlet extends HttpServlet {
         RespMessage<ItemDTO> message = new RespMessage<>();
         String state;
         resp.setContentType("application/json");
-        if (list!=null){
-            state = message.createMassage("OK", "Item Successfully Saved !", list);
+        if (list != null) {
+            state = message.createMassage("OK", "Item Successfully Loaded !", list);
             resp.setStatus(HttpServletResponse.SC_CREATED);
-        }else {
-            state = message.createMassage("NOT", "Item Not Saved !", null);
+        } else {
+            state = message.createMassage("NOT", "Item Not Load !", null);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        resp.getWriter().write(state);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String itemCode = req.getParameter("itemCode");
+        String description = req.getParameter("description");
+        String unitPrice = req.getParameter("unitPrice");
+        String qty = req.getParameter("qty");
+        System.out.println(qty + " " + unitPrice + " " + description + " " + itemCode);
+        ItemDTO itemDTO = new ItemDTO(itemCode, description, Double.parseDouble(unitPrice), Integer.parseInt(qty));
+        RespMessage<ItemDTO> message = new RespMessage<>();
+        String state = null;
+        resp.setContentType("application/json");
+        boolean b = false;
+        try {
+            if (itemBO.saveItem(itemDTO)) {
+                state = message.createMassage("OK", "Item Successfully Saved !", null);
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                state = message.createMassage("NOT", "Item Not Saved !", null);
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            state = message.createMassage("NOT", e.getLocalizedMessage(), null);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        resp.getWriter().write(state);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
+        String itemCode = jsonObject.getString("itemCode");
+        String description = jsonObject.getString("description");
+        Double unitPrice = jsonObject.getJsonNumber("unitPrice").doubleValue();
+        Integer qty = jsonObject.getJsonNumber("qty").intValue();
+
+        System.out.println(qty + " " + unitPrice + " " + description + " " + itemCode);
+
+        RespMessage<ItemDTO> message = new RespMessage<>();
+        String state = null;
+        resp.setContentType("application/json");
+        try {
+            if (itemBO.updateItem(new ItemDTO(itemCode, description,unitPrice,qty))) {
+                state = message.createMassage("OK", "Item Successfully Updated !", null);
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                state = message.createMassage("NOT", "Item Not Updated !", null);
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            state = message.createMassage("NOT", e.getLocalizedMessage(), null);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        resp.getWriter().write(state);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String itemCode = req.getParameter("itemCode");
+        RespMessage<ItemDTO> message = new RespMessage<>();
+        String state = null;
+        resp.setContentType("application/json");
+        try {
+            if (itemBO.deleteItem(itemCode)) {
+                state = message.createMassage("OK", "Item Successfully Deleted !", null);
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                state = message.createMassage("NOT", "Item Not Deleted !", null);
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            state = message.createMassage("NOT", e.getLocalizedMessage(), null);
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         resp.getWriter().write(state);

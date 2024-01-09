@@ -12,9 +12,9 @@ import java.util.List;
  * @since : 0.1.0
  **/
 public interface CustomerBO extends SuperBO {
-    boolean saveCustomer(CustomerDTO customerDTO);
+    boolean saveCustomer(CustomerDTO customerDTO) throws Exception;
 
-    boolean updateCustomer(CustomerDTO customerDTO);
+    boolean updateCustomer(CustomerDTO customerDTO) throws Exception;
 
     boolean deleteCustomer(String id);
 

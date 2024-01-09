@@ -20,7 +20,7 @@ public class CustomerBOImpl implements CustomerBO {
 
     CustomerDAO customerDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CUSTOMERDAO);
     @Override
-    public boolean saveCustomer(CustomerDTO customerDTO) {
+    public boolean saveCustomer(CustomerDTO customerDTO) throws Exception {
         customerDAO.setSession(Configure.getInstance().getSession());
         return customerDAO.save(new Customer(
                 customerDTO.getCusId(),
@@ -31,7 +31,7 @@ public class CustomerBOImpl implements CustomerBO {
     }
 
     @Override
-    public boolean updateCustomer(CustomerDTO customerDTO) {
+    public boolean updateCustomer(CustomerDTO customerDTO) throws Exception {
         customerDAO.setSession(Configure.getInstance().getSession());
         return customerDAO.update(new Customer(
                 customerDTO.getCusId(),
