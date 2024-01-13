@@ -32,22 +32,12 @@ public class OrdersServlet extends HttpServlet {
         Jsonb jsonb = JsonbBuilder.create();
         OrderDTO orderDTO = jsonb.fromJson(req.getReader(), OrderDTO.class);
         System.out.println(orderDTO);
-        /* {
-   "orderId":"U005",
-   "orderDate":"kamal",
-   "customerId":"matara",
-   "itemList" :[{
-       "itemCode" : "I002",
-       "description":"biscut",
-       "price" : 230.2,
-       "quantity":10
-   },
-   {
-       "itemCode" : "I003",
-       "description":"Lux",
-       "price" : 12000.2,
-       "quantity":3
-   }]
-}*/
     }
 }
+
+
+
+
+
+
+
