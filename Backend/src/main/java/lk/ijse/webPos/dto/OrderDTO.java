@@ -16,7 +16,6 @@ import java.util.ArrayList;
 @Data
 public class OrderDTO {
     private String orderId;
-    private String orderDate;
     private String customerId;
     private ArrayList<ItemDTO> itemList;
 }

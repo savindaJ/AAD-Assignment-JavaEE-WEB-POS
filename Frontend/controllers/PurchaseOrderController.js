@@ -30,37 +30,61 @@ $('#btnPlaceOrder').on('click', function () {
 
     $('#btnPlaceOrder').prop("disabled", true);
 
-    let itemList = [];
+    let list = [];
 
     let trList = $('#order-tbl-body > tr');
 
     for (const tr of trList) {
         let child = $(tr).children();
-        let object = {
-            oid: $('#txtOrderId').val(),
-            code: $(child[0]).text(),
-            qty: $(child[3]).text(),
-            unitPrice: $(child[2]).text()
+        let item = {
+            itemCode: $(child[0]).text(),
+            description: $(child[1]).text(),
+            price: $(child[4]).text(),
+            quantity: $(child[3]).text()
         }
-        itemList.push(object);
+        list.push(item);
     }
 
-    orderDB.push({
-        oid: $("#txtOrderId").val(),
-        date: $('#txtDate').val(),
-        customerID: $('#selCusId').val(),
-        orderDetails: itemList
+    const orderObj = {
+        orderId: $("#txtOrderId").val(),
+        customerId: $('#selCusId').val(),
+        itemList: list
+    }
+
+    $.ajax({
+        method: 'post',
+        url: baseUrl+'order',
+        contentType: 'json',
+        data: JSON.stringify(orderObj),
+        success: function (res) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: res.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            clearAll();
+            clearBill();
+            getAllItem();
+            $('#order-tbl-body').empty();
+            loadAllOrderDetails();
+        },
+        error:function (err) {
+            let responseJson = JSON.parse(err.responseText);
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: responseJson.message,
+                showConfirmButton: true
+            });
+        }
     });
-
-    clearAll();
-    $('#order-tbl-body').empty();
-    loadAllOrderDetails();
-
 });
 
 $('#btnAddOrder').on('click', function () {
 
-    if ($('#getQty').val()===""){
+    if ($('#getQty').val() === "") {
         alert("empty value in hear !")
         return
     }
