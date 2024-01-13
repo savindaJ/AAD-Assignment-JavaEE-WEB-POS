@@ -22,6 +22,14 @@ import java.io.IOException;
  **/
 @WebServlet(urlPatterns = "/order")
 public class OrdersServlet extends HttpServlet {
+
+
+
+    @Override
+    public void init() throws ServletException {
+
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -31,7 +39,7 @@ public class OrdersServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Jsonb jsonb = JsonbBuilder.create();
         OrderDTO orderDTO = jsonb.fromJson(req.getReader(), OrderDTO.class);
-        System.out.println(orderDTO);
+
     }
 }
 
