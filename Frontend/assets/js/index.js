@@ -149,112 +149,25 @@ nav_item.addEventListener("click", function () {
     main_root.style.transitionDuration = `1s`;
 });
 
-//customer save option
-/*
-let customerArray = [{
-    name: `kamal`,
-    address: `galle`,
-    tp: `0714523869`,
-    id: `C001`
-}];
+function setDefault(){
+    nav_customer_txt.style.fontSize = `20px`;
+    nav_customer_txt.style.color = `black`;
 
-let btnCustomer = document.getElementById("save-customer");
+    nav_item_txt.style.fontSize = `20px`;
+    nav_item_txt.style.color = `black`;
 
-let id = document.getElementById("customer-gmail");
-let address = document.getElementById("customer-address");
-let name = document.getElementById("customer-name");
-let tp = document.getElementById("customer-tp");
+    nav_order_txt.style.fontSize = `20px`;
+    nav_order_txt.style.color = `black`;
 
-let tableBody = document.getElementById("body");
+    nav_home_txt.style.fontSize = `21px`;
+    nav_home_txt.style.color = `red`;
 
+    nav_order_detail_txt.style.fontSize = `20px`;
+    nav_order_detail_txt.style.color = `black`;
 
-$(`#save-customer`).click(function () {
-    // let customer = [id.value, address.value, name.value, tp.value];
-    let cus = {
-        name: name.value,
-        id: id.value,
-        address: address.value,
-        tp: tp.value
-    }
-    customerArray.push(cus);
-    for (const customer of customerArray) {
-        console.log(customerArray);
-    }
-
-    getAll();
-
-});
-
-$(`#getAllCustomer`).click(function () {
-    getAll();
-});
-
-
-function getAll() {
-
-    $(`#body`).empty();
-
-    for (const customer of customerArray) {
-
-        $(`#body`).append(`<tr>
-                                <td>${customer.id}</td>
-                                <td>${customer.name}</td>
-                                <td>${customer.address}</td>
-                                <td>${customer.tp}</td>
-                                <td><button type="button" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal2">
-                                    Edit
-                                </button>
-                                <button class="btn btn-danger me-3 btn-sm delete">Delete</button></td>
-                   
-                             </tr>`);
-
-        setEvent();
-    }
-
-
+    main_root.style.position = `relative`;
+    main_root.style.left = `0`;
+    main_root.style.transitionDuration = `1s`;
 }
 
-function setEvent() {
-
-    $(`#tblCustomer tr`).click(function () {
-
-        var $row = $(this).closest("tr"),        // Finds the closest row <tr>
-            $tds = $row.find("td:nth-child(1)");
-        $ts = $row.find("td:nth-child(2)");
-        $tt = $row.find("td:nth-child(3)");
-        $tf = $row.find("td:nth-child(4)");
-        // let td_list =  $();
-
-        $(`#upCID`).val($tds.text());
-        $(`#upCName`).val($ts.text());
-        $(`#upCAddress`).val($tt.text());
-        $(`#upCTp`).val($tf.text());
-
-    });
-
-    $('.delete').click(function () {
-        $(`#tblCustomer tr`).click(function () {
-            $(this).closest("tr").remove();      // Finds the closest row <t
-        });
-    });
-}
-
-$(`#tblCustomer tr`).click(function () {
-
-    var $row = $(this).closest("tr");        // Finds the closest row <tr>
-    $tds = $row.find("td:nth-child(1)");
-    $ts = $row.find("td:nth-child(2)");
-    $tt = $row.find("td:nth-child(3)");
-    $tf = $row.find("td:nth-child(4)");
-    // let td_list =  $();
-
-    $(`#upCID`).val($tds.text());
-    $(`#upCName`).val($ts.text());
-    $(`#upCAddress`).val($tt.text());
-    $(`#upCTp`).val($tf.text());
-
-
-});
-
-getAll();*/
+setDefault();
