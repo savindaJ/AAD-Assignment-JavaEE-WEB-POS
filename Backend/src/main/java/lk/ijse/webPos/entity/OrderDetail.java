@@ -33,4 +33,9 @@ public class OrderDetail {
     public OrderDetail() {
 
     }
+
+    public OrderDetail(OrderDetailPK orderDetailPK, Integer quantity) {
+        this.orderDetailPK = orderDetailPK;
+        this.qty = quantity;
+    }
 }

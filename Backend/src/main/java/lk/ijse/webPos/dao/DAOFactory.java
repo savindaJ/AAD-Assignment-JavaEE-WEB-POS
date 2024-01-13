@@ -2,6 +2,7 @@ package lk.ijse.webPos.dao;
 
 import lk.ijse.webPos.dao.custom.impl.CustomerDAOImpl;
 import lk.ijse.webPos.dao.custom.impl.ItemDAOImpl;
+import lk.ijse.webPos.dao.custom.impl.OrderDAOImpl;
 
 import java.util.Stack;
 
@@ -30,6 +31,8 @@ public class DAOFactory {
                 return (T) new CustomerDAOImpl();
             case ITEMDAO:
                 return (T) new ItemDAOImpl();
+            case ORDERDAO:
+                return (T) new OrderDAOImpl();
             default:
                 return null;
         }

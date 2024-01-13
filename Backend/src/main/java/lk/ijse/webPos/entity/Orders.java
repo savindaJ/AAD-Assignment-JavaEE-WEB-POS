@@ -3,6 +3,7 @@ package lk.ijse.webPos.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -24,6 +25,7 @@ public class Orders {
     @Column(name = "order_id",length = 50)
     private String orderID;
     @Column(name = "order_date")
+    @CreationTimestamp
     private Timestamp date;
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -31,4 +33,10 @@ public class Orders {
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "orders")
     private List<OrderDetail> orderDetails = new ArrayList<>();
+
+    public Orders(String orderId, Customer customer, List<OrderDetail> orderDetails) {
+        this.orderID = orderId;
+        this.customer = customer;
+        this.orderDetails = orderDetails;
+    }
 }
