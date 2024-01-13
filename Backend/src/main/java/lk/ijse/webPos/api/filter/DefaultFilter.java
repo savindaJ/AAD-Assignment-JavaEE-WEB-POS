@@ -1,9 +1,8 @@
-package lk.ijse.webPos.controller.filter;
+package lk.ijse.webPos.api.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.ijse.webPos.config.Configure;
 
 import java.io.IOException;
 

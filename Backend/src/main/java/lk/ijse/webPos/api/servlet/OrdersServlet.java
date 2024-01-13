@@ -1,9 +1,5 @@
-package lk.ijse.webPos.controller.servlet;
+package lk.ijse.webPos.api.servlet;
 
-import jakarta.json.Json;
-import jakarta.json.JsonArray;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonValue;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.ServletException;
@@ -13,20 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.OrderBO;
-import lk.ijse.webPos.config.Configure;
-import lk.ijse.webPos.dto.ItemDTO;
 import lk.ijse.webPos.dto.OrderDTO;
-import lk.ijse.webPos.embedded.OrderDetailPK;
-import lk.ijse.webPos.entity.Customer;
-import lk.ijse.webPos.entity.OrderDetail;
-import lk.ijse.webPos.entity.Orders;
 import lk.ijse.webPos.util.RespMessage;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author : savindaJ

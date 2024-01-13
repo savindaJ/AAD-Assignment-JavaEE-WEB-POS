@@ -1,4 +1,4 @@
-package lk.ijse.webPos.controller.servlet;
+package lk.ijse.webPos.api.servlet;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;

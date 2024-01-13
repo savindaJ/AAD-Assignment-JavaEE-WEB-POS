@@ -1,7 +1,6 @@
-package lk.ijse.webPos.controller.servlet;
+package lk.ijse.webPos.api.servlet;
 
 import jakarta.json.Json;
-import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.ItemBO;
-import lk.ijse.webPos.dto.CustomerDTO;
 import lk.ijse.webPos.dto.ItemDTO;
 import lk.ijse.webPos.util.RespMessage;
 
