@@ -3,7 +3,9 @@ package lk.ijse.webPos.dao.custom.impl;
 import lk.ijse.webPos.dao.custom.OrderDAO;
 import lk.ijse.webPos.entity.Orders;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,7 +19,14 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public boolean save(Orders dto) throws Exception {
-        return false;
+        try {
+            Transaction transaction = session.beginTransaction();
+            Serializable save = session.save(dto);
+            transaction.commit();
+            return save!=null;
+        }catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 
     @Override
@@ -42,6 +51,6 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public void setSession(Session session) {
-
+        this.session = session;
     }
 }

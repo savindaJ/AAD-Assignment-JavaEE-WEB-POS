@@ -53,26 +53,7 @@ public class OrdersServlet extends HttpServlet {
         Jsonb jsonb = JsonbBuilder.create();
         OrderDTO orderDTO = jsonb.fromJson(req.getReader(), OrderDTO.class);
 
-        String orderId = orderDTO.getOrderId();
-        String customerId = orderDTO.getCustomerId();
-        ArrayList<ItemDTO> itemList = orderDTO.getItemList();
-
-        Session session = Configure.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        Customer customer = session.get(Customer.class, customerId);
-
-        List<OrderDetail> orderDetails = new ArrayList<>();
-
-        for (ItemDTO itemDTO : itemList) {
-            OrderDetail orderDetail = new OrderDetail(new OrderDetailPK(orderId,itemDTO.getItemCode()), itemDTO.getQuantity());
-            orderDetails.add(orderDetail);
-        }
-
-        Orders orders = new Orders(orderId,customer, orderDetails);
-        session.save(orders);
-        transaction.commit();
-        session.close();
-       /* RespMessage<OrderDTO> message = new RespMessage<>();
+        RespMessage<OrderDTO> message = new RespMessage<>();
         String ok;
         try {
             if (orderBO.placeOrder(orderDTO)){
@@ -86,11 +67,25 @@ public class OrdersServlet extends HttpServlet {
             ok = message.createMassage("NOT", e.getLocalizedMessage(), null);
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-        resp.getWriter().write(ok);*/
+        resp.getWriter().write(ok);
     }
 }
 
+/*Session session = Configure.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Customer customer = session.get(Customer.class, customerId);
 
+        List<OrderDetail> orderDetails = new ArrayList<>();
+
+        for (ItemDTO itemDTO : itemList) {
+            OrderDetail orderDetail = new OrderDetail(new OrderDetailPK(orderId,itemDTO.getItemCode()), itemDTO.getQuantity());
+            orderDetails.add(orderDetail);
+        }
+
+        Orders orders = new Orders(orderId,customer, orderDetails);
+        session.save(orders);
+        transaction.commit();
+        session.close();*/
 
 
 

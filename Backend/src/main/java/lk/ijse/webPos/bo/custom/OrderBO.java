@@ -9,5 +9,5 @@ import lk.ijse.webPos.dto.OrderDTO;
  * @since : 0.1.0
  **/
 public interface OrderBO extends SuperBO {
-    boolean placeOrder(OrderDTO orderDTO);
+    boolean placeOrder(OrderDTO orderDTO) throws Exception;
 }

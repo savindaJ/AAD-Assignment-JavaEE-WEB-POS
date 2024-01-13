@@ -39,7 +39,7 @@ public class ItemDAOImpl implements ItemDAO {
             Transaction transaction = session.beginTransaction();
             session.update(entity);
             transaction.commit();
-            session.close();
+//            session.close();
             return true;
         }catch (Exception e) {
             throw e;
@@ -74,7 +74,10 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public Item getItem(String id) {
-        return null;
+        Transaction transaction = session.beginTransaction();
+        Item item = session.get(Item.class, id);
+        transaction.commit();
+        return item;
     }
 
     @Override
