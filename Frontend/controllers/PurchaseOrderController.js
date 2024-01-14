@@ -66,7 +66,8 @@ $('#btnPlaceOrder').on('click', function () {
                 timer: 1500
             });
             clearAll();
-            clearBill();
+            // clearBill();
+            loadAllOrderDetails();
             getAllItem();
             $('#order-tbl-body').empty();
             loadAllOrderDetails();

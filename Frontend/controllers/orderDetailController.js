@@ -1,18 +1,27 @@
 function loadAllOrderDetails(){
+    $.ajax({
+        url:baseUrl+'orderDetail',
+        type:'get',
+        dataType:'json',
+        success:function (res) {
+            $('#order-detail-body').empty();
+            for (const detail of res.data) {
 
-    $('#order-detail-body').empty();
-
-    for (const object of orderDB) {
-        for (let i = 0; i < object.orderDetails.length; i++) {
-            $('#order-detail-body').append(`<tr>
-                <td>${object.oid}</td>
-                <td>${object.customerID}</td>
-                <td>${object.orderDetails[i].code}</td>
-                <td>${object.orderDetails[i].qty}</td>
-                <td>${object.date}</td>
+                $('#order-detail-body').append(`<tr>
+                <td>${detail.orderId}</td>
+                <td>${detail.customerId}</td>
+                <td>${detail.itemCode}</td>
+                <td>${detail.qty}</td>
+                <td>${detail.date}</td>
             </tr>`);
+
+            }
+        },
+        error:function (err) {
+            let mes = JSON.parse(err.responseText);
+            alert(mes.message);
         }
-    }
+    });
 }
 
 loadAllOrderDetails();
