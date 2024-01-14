@@ -54,4 +54,9 @@ public class OrderDAOImpl implements OrderDAO {
     public void setSession(Session session) {
         this.session = session;
     }
+
+    @Override
+    public String getLastOrderId() {
+        return (String) session.createNativeQuery("SELECT order_id FROM Orders ORDER BY order_id DESC LIMIT 1").uniqueResult();
+    }
 }

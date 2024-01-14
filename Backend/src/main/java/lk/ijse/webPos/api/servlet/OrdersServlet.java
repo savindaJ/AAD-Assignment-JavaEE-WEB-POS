@@ -31,7 +31,12 @@ public class OrdersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.getWriter().write(new RespMessage<>().createMassage("NOT", nextOrderID(), null));
+    }
 
+    private String nextOrderID() {
+        return orderBO.getLastOrderId();
     }
 
     @Override
@@ -42,14 +47,14 @@ public class OrdersServlet extends HttpServlet {
         RespMessage<OrderDTO> message = new RespMessage<>();
         String ok;
         try {
-            if (orderBO.placeOrder(orderDTO)){
+            if (orderBO.placeOrder(orderDTO)) {
                 ok = message.createMassage("OK", "Order Placed Successfully !", null);
                 resp.setStatus(HttpServletResponse.SC_CREATED);
-            }else {
+            } else {
                 ok = message.createMassage("NOT", "Order Not Placed !", null);
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             ok = message.createMassage("NOT", e.getLocalizedMessage(), null);
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }

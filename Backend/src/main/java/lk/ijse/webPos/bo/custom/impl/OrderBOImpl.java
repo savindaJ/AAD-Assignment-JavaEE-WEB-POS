@@ -35,6 +35,30 @@ public class OrderBOImpl implements OrderBO {
         return addOrder(orderDTO);
     }
 
+    @Override
+    public String getLastOrderId() {
+        orderDAO.setSession(Configure.getInstance().getSession());
+        String lastOrderId = orderDAO.getLastOrderId();
+        if (lastOrderId == null) {
+            return "ORD-001";
+        } else {
+
+            int maxId = Integer.parseInt(lastOrderId.replace("ORD-", ""));
+
+            maxId = maxId + 1;
+
+            String id = "";
+            if (maxId < 10) {
+                id = "ORD-00" + maxId;
+            } else if (maxId < 100) {
+                id = "ORD-00" + maxId;
+            } else {
+                id = "ORD-00" + maxId;
+            }
+            return id;
+        }
+    }
+
     private boolean addOrder(OrderDTO orderDTO) throws Exception {
         List<OrderDetail> orderDetails = new ArrayList<>();
         Session session = Configure.getInstance().getSession();

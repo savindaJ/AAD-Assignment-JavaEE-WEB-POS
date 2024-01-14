@@ -10,4 +10,6 @@ import lk.ijse.webPos.dto.OrderDTO;
  **/
 public interface OrderBO extends SuperBO {
     boolean placeOrder(OrderDTO orderDTO) throws Exception;
+
+    String getLastOrderId();
 }
