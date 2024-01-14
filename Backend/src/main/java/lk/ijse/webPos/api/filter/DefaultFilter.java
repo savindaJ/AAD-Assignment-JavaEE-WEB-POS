@@ -3,6 +3,7 @@ package lk.ijse.webPos.api.filter;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.webPos.config.Configure;
 
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class DefaultFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-//        Configure.getInstance().getSession();
+        Configure.getInstance().getSession();
         System.out.println("Init Filter !");
     }
 
