@@ -51,9 +51,9 @@ public class OrderBOImpl implements OrderBO {
             if (maxId < 10) {
                 id = "ORD-00" + maxId;
             } else if (maxId < 100) {
-                id = "ORD-00" + maxId;
+                id = "ORD-0" + maxId;
             } else {
-                id = "ORD-00" + maxId;
+                id = "ORD-" + maxId;
             }
             return id;
         }
