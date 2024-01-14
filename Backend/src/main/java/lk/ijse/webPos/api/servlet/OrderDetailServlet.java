@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.OrderDetailBO;
+import lk.ijse.webPos.dto.OrderDetailDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author : savindaJ
@@ -27,6 +29,6 @@ public class OrderDetailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        ArrayList<OrderDetailDTO> list = orderDetailBO.getAllOrderDetails();
     }
 }
