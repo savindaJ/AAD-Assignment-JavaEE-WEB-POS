@@ -3,6 +3,7 @@ package lk.ijse.webPos.dao;
 import lk.ijse.webPos.dao.custom.impl.CustomerDAOImpl;
 import lk.ijse.webPos.dao.custom.impl.ItemDAOImpl;
 import lk.ijse.webPos.dao.custom.impl.OrderDAOImpl;
+import lk.ijse.webPos.dao.custom.impl.QuarryDAOImpl;
 
 import java.util.Stack;
 
@@ -22,7 +23,7 @@ public class DAOFactory {
     }
 
     public enum DAOTypes {
-        CUSTOMERDAO,ITEMDAO, ORDERDAO, ORDERDETAILDAO, QUERYDAO
+        CUSTOMERDAO,ITEMDAO, ORDERDAO, QUERYDAO
     }
 
     public <T extends SuperDAO> T getDAO(DAOTypes daoTypes) {
@@ -33,6 +34,8 @@ public class DAOFactory {
                 return (T) new ItemDAOImpl();
             case ORDERDAO:
                 return (T) new OrderDAOImpl();
+            case QUERYDAO:
+                return (T) new QuarryDAOImpl();
             default:
                 return null;
         }
