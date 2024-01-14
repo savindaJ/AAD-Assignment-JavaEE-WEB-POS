@@ -4,7 +4,7 @@ $('#btnAddOrder').prop("disabled", true);
 
 $('#btnPlaceOrder').prop("disabled", true);
 
-$('#txtOrderId').on('keyup keydown',function (e){
+/*$('#txtOrderId').on('keyup keydown',function (e){
     if (e.key == "Tab") {
         e.preventDefault();
     }
@@ -20,10 +20,10 @@ $('#txtOrderId').on('keyup keydown',function (e){
         $('#selCusId').focus();
     }
 
-});
+});*/
 
 function clearAll() {
-    $('#txtOrderId ,#selCusId ,#orderCusName ,#orderCusAddres ,#orderCusTp ,#selItemId ,#orderItemDesc ,#orderItemPrice ,#orderQty ,#getQty ,#total ,#subTotal').val('');
+    $('#orderCusName ,#orderCusAddres ,#orderCusTp ,#selItemId ,#orderItemDesc ,#orderItemPrice ,#orderQty ,#getQty ,#total ,#subTotal').val('');
     finalTotal = 0;
     final = 0;
     $('#btnAddOrder').prop("disabled", true);

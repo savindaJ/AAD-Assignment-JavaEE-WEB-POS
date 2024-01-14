@@ -15,6 +15,7 @@ let finalTotal = 0;
 
 let final = 0;
 
+$('#txtOrderId').prop('disabled',true);
 
 $('#btnClear').on('click', function () {
     clearAll();
@@ -53,7 +54,7 @@ $('#btnPlaceOrder').on('click', function () {
 
     $.ajax({
         method: 'post',
-        url: baseUrl+'order',
+        url: baseUrl + 'order',
         contentType: 'json',
         data: JSON.stringify(orderObj),
         success: function (res) {
@@ -69,8 +70,9 @@ $('#btnPlaceOrder').on('click', function () {
             getAllItem();
             $('#order-tbl-body').empty();
             loadAllOrderDetails();
+            getNextOrderId();
         },
-        error:function (err) {
+        error: function (err) {
             let responseJson = JSON.parse(err.responseText);
             Swal.fire({
                 position: "top-end",
@@ -188,3 +190,27 @@ function loadCusIds(ids) {
     }
 }
 
+function getNextOrderId() {
+    $.ajax({
+        url: baseUrl + 'order',
+        type: 'get',
+        dataType : 'json',
+        success:function (res) {
+            $("#txtOrderId").val(res.message);
+            $('#txtOrderId').css("border", "2px solid green");
+            $('#selCusId').prop('disabled',false);
+            $('#txtOrderId').prop('disabled',true);
+        },
+        error:function (err) {
+            let responseJson = JSON.parse(err.responseText);
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: responseJson.message,
+                showConfirmButton: true
+            });
+        }
+    })
+}
+
+getNextOrderId();
