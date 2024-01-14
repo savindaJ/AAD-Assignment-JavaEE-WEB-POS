@@ -37,6 +37,9 @@ public class OrderBOImpl implements OrderBO {
 
     @Override
     public String getLastOrderId() {
+
+        // ToDo : business logic
+
         orderDAO.setSession(Configure.getInstance().getSession());
         String lastOrderId = orderDAO.getLastOrderId();
         if (lastOrderId == null) {
