@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author : savindaJ
@@ -19,5 +20,5 @@ public class OrderDetailDTO {
     private String customerId;
     private String itemCode;
     private Integer qty;
-    private Date date;
+    private Timestamp date;
 }

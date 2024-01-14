@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.OrderDetailBO;
 import lk.ijse.webPos.dto.OrderDetailDTO;
+import lk.ijse.webPos.util.RespMessage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,10 +26,15 @@ public class OrderDetailServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         orderDetailBO = BOFactory.getInstance().getBO(BOFactory.BOTypes.ORDERDETAIL);
+        System.out.println(orderDetailBO);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArrayList<OrderDetailDTO> list = orderDetailBO.getAllOrderDetails();
+//        resp.getWriter().write(new RespMessage<OrderDetailDTO> ().createMassage("200", "Success", list));
+        for (OrderDetailDTO orderDetailDTO : list) {
+            System.out.println(orderDetailDTO);
+        }
     }
 }

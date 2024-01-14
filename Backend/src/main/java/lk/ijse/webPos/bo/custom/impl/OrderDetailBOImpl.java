@@ -1,6 +1,7 @@
 package lk.ijse.webPos.bo.custom.impl;
 
 import lk.ijse.webPos.bo.custom.OrderDetailBO;
+import lk.ijse.webPos.config.Configure;
 import lk.ijse.webPos.dao.DAOFactory;
 import lk.ijse.webPos.dao.custom.QuarryDAO;
 import lk.ijse.webPos.dto.OrderDetailDTO;
@@ -18,6 +19,7 @@ public class OrderDetailBOImpl implements OrderDetailBO {
 
     @Override
     public ArrayList<OrderDetailDTO> getAllOrderDetails() {
+        quarryDAO.setSession(Configure.getInstance().getSession());
         return quarryDAO.getAllOrderDetails();
     }
 }
