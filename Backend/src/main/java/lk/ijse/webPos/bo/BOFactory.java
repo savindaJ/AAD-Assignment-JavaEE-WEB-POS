@@ -3,6 +3,7 @@ package lk.ijse.webPos.bo;
 import lk.ijse.webPos.bo.custom.impl.CustomerBOImpl;
 import lk.ijse.webPos.bo.custom.impl.ItemBOImpl;
 import lk.ijse.webPos.bo.custom.impl.OrderBOImpl;
+import lk.ijse.webPos.bo.custom.impl.OrderDetailBOImpl;
 
 /**
  * @author : savindaJ
@@ -20,7 +21,7 @@ public class BOFactory {
     }
 
     public enum BOTypes {
-        CUSTOMER,ITEM,ORDER
+        CUSTOMER,ITEM,ORDER,ORDERDETAIL
     }
 
     public <T extends SuperBO> T getBO(BOTypes boTypes) {
@@ -31,6 +32,8 @@ public class BOFactory {
                 return (T) new ItemBOImpl();
             case ORDER:
                 return (T) new OrderBOImpl();
+            case ORDERDETAIL:
+                return (T) new OrderDetailBOImpl();
             default:
                 return null;
         }
