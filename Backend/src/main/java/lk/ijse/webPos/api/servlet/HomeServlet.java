@@ -31,6 +31,8 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         StatusDTO status = orderDetailBO.getStatus();
+        resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+        resp.setContentType("application/json");
         resp.getWriter().println(new RespMessage<StatusDTO>()
                 .createMassage("200", "Success", new ArrayList<>() {{
                     add(status);
