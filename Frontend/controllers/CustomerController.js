@@ -48,7 +48,8 @@ function getAll() {
         dataType: "json",
         success: function (resp) {
             $(`#body`).empty();
-            loadCusIds(resp.data)
+            loadCusIds(resp.data);
+            setStatus();
             for (const customer of resp.data) {
                 $(`#body`).append(`<tr>
                                 <td>${customer.cusId}</td>

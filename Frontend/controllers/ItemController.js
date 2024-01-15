@@ -8,7 +8,7 @@ function updateItem() {
     if (searchItem(id) === undefined) {
         alert("No such Item..please check the ID");
         $('#Item-body').empty();
-    }else {
+    } else {
         let description = $(`#upItemdesc`).val();
         let unitPrice = $(`#upUnitPrice`).val();
         let qty = $(`#upQty`).val();
@@ -30,7 +30,7 @@ function updateItem() {
                     position: "top-end", icon: "success", title: res.message, showConfirmButton: false, timer: 1500
                 });
             },
-            error:function (err) {
+            error: function (err) {
                 let parse = JSON.parse(err.responseText);
                 alert(parse.message);
             }
@@ -96,7 +96,7 @@ function getAllItem() {
             itemDB = res.data;
             setItemIds(itemDB);
             $('#Item-body').empty();
-
+            setStatus();
             for (const item of res.data) {
                 $(`#Item-body`).append(`<tr>
                                 <td>${item.itemCode}</td>

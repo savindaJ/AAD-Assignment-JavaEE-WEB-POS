@@ -72,6 +72,7 @@ $('#btnPlaceOrder').on('click', function () {
             $('#order-tbl-body').empty();
             loadAllOrderDetails();
             getNextOrderId();
+            setStatus();
         },
         error: function (err) {
             let responseJson = JSON.parse(err.responseText);
