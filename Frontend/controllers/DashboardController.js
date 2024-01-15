@@ -1,12 +1,24 @@
 function setStatus(){
-    $('#totOfCustomers').text(customerDB.length);
-    $('#totOfItems').text(itemDB.length);
-    $('#totOfOrders').text(orderDB.length);
-    $('#finishOrders').text(orderDB.length);
+    $.ajax({
+        method: 'GET',
+        url: baseUrl,
+        dataType: 'json',
+        success: function(res){
 
+            for (const re of res.data) {
+                $('#income').text(re.income);
+                $('#totOfCustomers').text(re.cusCount);
+                $('#totOfItems').text(re.itemCount);
+                $('#totOfOrders').text(re.orderCount);
+                $('#finishOrders').text(re.orderDetailCount);
+            }
+        },
+        error: function(err){
+            let error = JSON.parse(err.responseText);
+            console.log(error.message);
+        }
+    })
 
-
-    $('#income').text('55000');
 }
 
 setStatus();
