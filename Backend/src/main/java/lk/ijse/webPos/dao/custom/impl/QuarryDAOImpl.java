@@ -2,11 +2,14 @@ package lk.ijse.webPos.dao.custom.impl;
 
 import lk.ijse.webPos.dao.custom.QuarryDAO;
 import lk.ijse.webPos.dto.OrderDetailDTO;
+import lk.ijse.webPos.dto.StatusDTO;
 import lk.ijse.webPos.entity.Customer;
 import lk.ijse.webPos.entity.OrderDetail;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -52,16 +55,19 @@ public class QuarryDAOImpl implements QuarryDAO {
     public void setSession(Session session) {
         this.session = session;
     }
-}
 
-/*
+    @Override
+    public StatusDTO getStatus() {
         Transaction transaction = session.beginTransaction();
-        Object cus = session.createNativeQuery("select count(*) from customer").getSingleResult();
-        Object order = session.createNativeQuery("select count(*) from item").getSingleResult();
-        Object item = session.createNativeQuery("select count(*) from order_detail").getSingleResult();
-        Object orderDetail = session.createNativeQuery("select count(*) from orders").getSingleResult();
+        BigInteger cusCount = (BigInteger) session.createNativeQuery("select count(*) from customer").getSingleResult();
+        BigInteger itemCount = (BigInteger) session.createNativeQuery("select count(*) from item").getSingleResult();
+        BigInteger detailCount = (BigInteger) session.createNativeQuery("select count(*) from order_detail").getSingleResult();
+        BigInteger orderCount = (BigInteger) session.createNativeQuery("select count(*) from orders").getSingleResult();
+        Double income = (Double) session.createNativeQuery("select sum(od.order_quantity * i.item_price) from order_detail od\n" +
+                "JOIN\n" +
+                "item i\n" +
+                "ON od.item_code = i.item_code").getSingleResult();
         transaction.commit();
-        System.out.println(cus+" "+order+" "+item+" "+orderDetail);
-        return new ArrayList<>();
-
-*/
+        return new StatusDTO(cusCount,orderCount,itemCount,detailCount,income);
+    }
+}

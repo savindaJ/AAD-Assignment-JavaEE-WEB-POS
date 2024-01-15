@@ -2,6 +2,7 @@ package lk.ijse.webPos.dao.custom;
 
 import lk.ijse.webPos.dao.SuperDAO;
 import lk.ijse.webPos.dto.OrderDetailDTO;
+import lk.ijse.webPos.dto.StatusDTO;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
@@ -15,4 +16,7 @@ public interface QuarryDAO extends SuperDAO {
     ArrayList<OrderDetailDTO> getAllOrderDetails();
 
     void setSession(Session session);
+
+
+    StatusDTO getStatus();
 }

@@ -2,6 +2,7 @@ package lk.ijse.webPos.bo.custom;
 
 import lk.ijse.webPos.bo.SuperBO;
 import lk.ijse.webPos.dto.OrderDetailDTO;
+import lk.ijse.webPos.dto.StatusDTO;
 
 import java.util.ArrayList;
 
@@ -12,4 +13,6 @@ import java.util.ArrayList;
  **/
 public interface OrderDetailBO extends SuperBO {
     ArrayList<OrderDetailDTO> getAllOrderDetails();
+
+    StatusDTO getStatus();
 }
