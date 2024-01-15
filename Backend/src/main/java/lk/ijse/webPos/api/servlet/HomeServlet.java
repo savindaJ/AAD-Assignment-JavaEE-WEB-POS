@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.OrderDetailBO;
 import lk.ijse.webPos.dto.StatusDTO;
+import lk.ijse.webPos.util.RespMessage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author : savindaJ
@@ -29,6 +31,9 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         StatusDTO status = orderDetailBO.getStatus();
-        System.out.println(status);
+        resp.getWriter().println(new RespMessage<StatusDTO>()
+                .createMassage("200", "Success", new ArrayList<>() {{
+                    add(status);
+                }}));
     }
 }
