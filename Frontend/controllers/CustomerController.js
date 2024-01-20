@@ -145,12 +145,20 @@ $('#updateCustomer').on('click', function () {
         data: JSON.stringify(customer),
         success: function (res) {
             // alert(res.message)
-            Swal.fire({
+            const Toast = Swal.mixin({
+                toast: true,
                 position: "top-end",
-                icon: "success",
-                title: res.message,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: res.message
             });
             getAll();
             clearUpdateFiald();

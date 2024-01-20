@@ -26,8 +26,20 @@ function updateItem() {
             success: function (res) {
                 getAllItem();
                 clearUpdateTxt();
-                Swal.fire({
-                    position: "top-end", icon: "success", title: res.message, showConfirmButton: false, timer: 1500
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: res.message
                 });
             },
             error: function (err) {
@@ -52,8 +64,20 @@ function saveItem() {
                 unitPrice: $('#txtItemQty').val(),
                 qty: $('#txtItemUnitPrice').val()
             }, success: function (res) {
-                Swal.fire({
-                    position: "top-end", icon: "success", title: res.message, showConfirmButton: false, timer: 1500
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: res.message
                 });
                 getAllItem();
             }, error: function (err) {

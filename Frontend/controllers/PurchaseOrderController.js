@@ -58,12 +58,20 @@ $('#btnPlaceOrder').on('click', function () {
         contentType: 'json',
         data: JSON.stringify(orderObj),
         success: function (res) {
-            Swal.fire({
+            const Toast = Swal.mixin({
+                toast: true,
                 position: "top-end",
-                icon: "success",
-                title: res.message,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: res.message
             });
             clearAll();
             // clearBill();
