@@ -55,4 +55,4 @@ function setBtn() {
     }
 }
 
-$("#btn-signUp").prop("disabled", true);
+$("#btn-signUp").prop("disabled", false);

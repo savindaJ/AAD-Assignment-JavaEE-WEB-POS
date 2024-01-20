@@ -16,7 +16,7 @@ $('#btn-signUp').on('click', function () {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/app/user',
+        url: baseUrl + 'user',
         type: 'get'
     });
 
