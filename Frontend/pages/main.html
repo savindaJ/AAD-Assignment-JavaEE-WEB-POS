@@ -66,7 +66,7 @@
 
                     <a class="nav-link active ms-3" aria-current="page" id="nav-log-out">
                         <h5 class="d-inline link-underline-opacity-10">
-                        Log-out <i class="bi bi-box-arrow-in-right text-danger"></i></h5></a>
+                            Log-out <i class="bi bi-box-arrow-in-right text-danger"></i></h5></a>
                 </div>
 
             </div>
@@ -263,26 +263,28 @@
                             <div class="container">
                                 <form>
                                     <div class="mb-3">
-                                        <label class="form-label" >ID</label>
+                                        <label class="form-label">ID</label>
                                         <input id="upCID" type="email" class="form-control" placeholder="">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label" >Customer Name</label>
+                                        <label class="form-label">Customer Name</label>
                                         <input id="upCName" type="email" class="form-control" placeholder="">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label" >Customer address</label>
+                                        <label class="form-label">Customer address</label>
                                         <input id="upCAddress" type="email" class="form-control" placeholder="">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label" >Customer TP</label>
+                                        <label class="form-label">Customer TP</label>
                                         <input id="upCTp" type="email" class="form-control" placeholder="">
                                     </div>
 
-                                    <button id="updateCustomer" type="button" class="btn btn-primary" data-bs-dismiss="modal">Update Customer</button>
+                                    <button id="updateCustomer" type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Update Customer
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -313,7 +315,8 @@
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="col-form-label col-form-label-sm">Order ID</label>
-                                            <input id="txtOrderId" type="text" class="form-control input-sm" placeholder="ID">
+                                            <input id="txtOrderId" type="text" class="form-control input-sm"
+                                                   placeholder="ID">
                                         </div>
 
 
@@ -330,7 +333,8 @@
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="col-form-label col-form-label-sm">Customer ID</label>
-                                            <select id="selCusId" class="form-select" aria-label="Default select example">
+                                            <select id="selCusId" class="form-select"
+                                                    aria-label="Default select example">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -350,12 +354,12 @@
                                             <input id="orderCusAddres" type="text" class="form-control" placeholder="">
                                         </div>
                                     </div>
-<!--                                    <div class="col-6">-->
-<!--                                        <div class="mb-3">-->
-<!--                                            <label class="col-form-label col-form-label-sm">Tp</label>-->
-<!--                                            <input id="orderCusSalary" type="text" class="form-control" placeholder="">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-6">-->
+                                    <!--                                        <div class="mb-3">-->
+                                    <!--                                            <label class="col-form-label col-form-label-sm">Tp</label>-->
+                                    <!--                                            <input id="orderCusSalary" type="text" class="form-control" placeholder="">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
 
                                 <div class="row">
@@ -381,7 +385,8 @@
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="col-form-label col-form-label-sm">Item ID</label>
-                                            <select id="selItemId" class="form-select" aria-label="Default select example">
+                                            <select id="selItemId" class="form-select"
+                                                    aria-label="Default select example">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -408,24 +413,25 @@
                                             <input id="orderQty" type="text" class="form-control" placeholder="">
                                         </div>
                                     </div>
-<!--                                    <div class="col-2">-->
-<!--                                        <div class="mb-3">-->
-<!--                                            <label class="col-form-label col-form-label-sm">QTY</label>-->
-<!--                                            <input type="number" class="form-control" placeholder="">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-2">-->
+                                    <!--                                        <div class="mb-3">-->
+                                    <!--                                            <label class="col-form-label col-form-label-sm">QTY</label>-->
+                                    <!--                                            <input type="number" class="form-control" placeholder="">-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
 
                                 <div class="row">
                                     <div class="mb-3">
                                         <label class="col-form-label col-form-label-sm">QTY</label>
-                                        <input contenteditable="false" id="getQty" type="number" class="form-control" placeholder="">
+                                        <input contenteditable="false" id="getQty" type="number" class="form-control"
+                                               placeholder="">
                                     </div>
                                 </div>
 
                                 <div class="row d-flex justify-content-end">
                                     <div class="col-3">
-                                            <button id="btnClear" type="button" class="btn btn-danger">Clear All</button>
+                                        <button id="btnClear" type="button" class="btn btn-danger">Clear All</button>
                                     </div>
                                     <div class="col-2">
                                         <button id="btnAddOrder" type="button" class="btn btn-primary">Add</button>
@@ -516,7 +522,9 @@
 
                         <div class="row" style="width: 20vw">
                             <div class="col-12 col-md-4">
-                                <button id="btnGetAllItem" class="btn btn-dark btn-sm" type="submit" style="height: 30px">Get All</button>
+                                <button id="btnGetAllItem" class="btn btn-dark btn-sm" type="submit"
+                                        style="height: 30px">Get All
+                                </button>
                             </div>
 
                             <div class="col-12 col-md-8">
@@ -533,7 +541,7 @@
                     <form class="row w-50" role="" method="">
 
                         <div class="col-12 col-md-6">
-                            <input  class="form-control me-2 mb-2 mb-lg-0" type="" placeholder="Enter Description/Code"
+                            <input class="form-control me-2 mb-2 mb-lg-0" type="" placeholder="Enter Description/Code"
                                    aria-label="Search" id="txtSearchItem" style="width: 250px; height: 40px">
                         </div>
                         <div class="col-12 col-md-4">
@@ -543,9 +551,9 @@
                             </select>
                         </div>
 
-<!--                        <div class="col-12 col-md-1">-->
-<!--                            <button class="btn btn-outline-success btn-sm" type="submit">Search</button>-->
-<!--                        </div>-->
+                        <!--                        <div class="col-12 col-md-1">-->
+                        <!--                            <button class="btn btn-outline-success btn-sm" type="submit">Search</button>-->
+                        <!--                        </div>-->
 
                     </form>
 
@@ -645,7 +653,9 @@
                                         <input id="upQty" type="text" class="form-control">
                                     </div>
 
-                                    <button id="btnUpdateItem" type="button" class="btn btn-primary" data-bs-dismiss="modal">Update Item</button>
+                                    <button id="btnUpdateItem" type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Update Item
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -674,13 +684,13 @@
                         </tr>
                         </thead>
                         <tbody id="order-detail-body">
-<!--                        <tr>-->
-<!--                            <td>O001</td>-->
-<!--                            <td>C001</td>-->
-<!--                            <td>I001</td>-->
-<!--                            <td>4</td>-->
-<!--                            <td>2023/9/30</td>-->
-<!--                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                            <td>O001</td>-->
+                        <!--                            <td>C001</td>-->
+                        <!--                            <td>I001</td>-->
+                        <!--                            <td>4</td>-->
+                        <!--                            <td>2023/9/30</td>-->
+                        <!--                        </tr>-->
 
                         </tbody>
                     </table>
