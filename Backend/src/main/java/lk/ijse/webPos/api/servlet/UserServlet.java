@@ -24,6 +24,7 @@ public class UserServlet extends HttpServlet {
         Jsonb jsonb = JsonbBuilder.create();
         UserDTO userDTO = jsonb.fromJson(req.getReader(), UserDTO.class);
         System.out.println(userDTO);
+        resp.getWriter().println("Hello");
     }
 
     @Override
