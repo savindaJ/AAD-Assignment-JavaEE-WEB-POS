@@ -24,7 +24,7 @@ $('#btn-signUp').on('click', function () {
             Swal.fire({
                 title: "Send Redirect Request, Please Wait...",
                 html: "I will close in <b></b> milliseconds.",
-                timer: 2000,
+                timer: 3000,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading();
@@ -39,7 +39,7 @@ $('#btn-signUp').on('click', function () {
             }).then((result) => {
                 /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer) {
-                    window.location.href = "../pages/main.html";
+                    window.location.href = "../index.html";
                 }
             });
         },

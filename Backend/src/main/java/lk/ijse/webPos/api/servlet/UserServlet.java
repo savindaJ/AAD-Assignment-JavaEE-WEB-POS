@@ -33,7 +33,8 @@ public class UserServlet extends HttpServlet {
         System.out.println("do get");
         System.out.println("do post");
         Jsonb jsonb = JsonbBuilder.create();
-        String json = jsonb.toJson(req.getReader(), Object.class);
+        UserDTO json = jsonb.fromJson(req.getReader(), UserDTO.class);
         System.out.println(json);
+        resp.getWriter().write(new RespMessage().createMassage("200", "success", null));
     }
 }
