@@ -1,7 +1,8 @@
-
-$('#btn-sign-in').on('click',function () {
+$('#btn-sign-in').on('click', function () {
     let email = $('#txt-email').val();
     let pw = $('#txt-pw').val();
+
+    console.log('text inputs : ',email,pw);
 
     const user = {
         email: email,
@@ -10,14 +11,15 @@ $('#btn-sign-in').on('click',function () {
 
     $.ajax({
         url: baseUrl + 'user',
-        type: 'get',
-        data:JSON.stringify(user),
+        type:'post',
+        contentType:'application/json',
+        data: JSON.stringify(user),
         success:function (res) {
             let timerInterval;
             Swal.fire({
                 title: "Send Redirect Request, Please Wait...",
                 html: "I will close in <b></b> milliseconds.",
-                timer: 3000,
+                timer: 2000,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading();
@@ -31,23 +33,17 @@ $('#btn-sign-in').on('click',function () {
                 }
             }).then((result) => {
                 /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer || res.message === 'success') {
-                    window.location.href = "../index.html";
-                }else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                    });
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.href = "pages/main.html";
                 }
             });
         },
         error:function (err) {
-            console.log(err);
+
         }
     });
 });
 
-$('#btn-register').on('click',function () {
+$('#btn-register').on('click', function () {
     window.location.href = 'pages/signup.html';
 });

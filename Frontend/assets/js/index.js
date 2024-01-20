@@ -170,4 +170,8 @@ function setDefault(){
     main_root.style.transitionDuration = `1s`;
 }
 
+$('#nav-log-out').on('click', function () {
+    window.location.href = '../index.html';
+});
+
 setDefault();
