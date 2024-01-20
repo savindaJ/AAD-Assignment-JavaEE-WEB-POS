@@ -11,7 +11,7 @@ $('#btn-sign-in').on('click', function () {
 
     $.ajax({
         url: baseUrl + 'user',
-        type:'post',
+        type:'get',
         contentType:'application/json',
         data: JSON.stringify(user),
         success:function (res) {
@@ -39,7 +39,7 @@ $('#btn-sign-in').on('click', function () {
             });
         },
         error:function (err) {
-
+            alert('error !')
         }
     });
 });
