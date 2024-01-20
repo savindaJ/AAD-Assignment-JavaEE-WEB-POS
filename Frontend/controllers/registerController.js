@@ -10,9 +10,9 @@ $('#btn-signUp').on('click', function () {
 
     const user = {
         email: email,
-        fname: fname,
-        lname: lname,
-        pw: pw
+        firstName: fname,
+        lastName: lname,
+        password: pw
     }
 
     $.ajax({
