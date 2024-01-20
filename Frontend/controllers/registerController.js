@@ -17,7 +17,14 @@ $('#btn-signUp').on('click', function () {
 
     $.ajax({
         url: baseUrl + 'user',
-        type: 'get'
+        type: 'post',
+        data:JSON.stringify(user),
+        success:function (res) {
+            console.log(res);
+        },
+        error:function (err) {
+            console.log(err);
+        }
     });
 
 });
