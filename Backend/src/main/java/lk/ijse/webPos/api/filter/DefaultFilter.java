@@ -2,6 +2,8 @@ package lk.ijse.webPos.api.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.config.Configure;
 
@@ -13,25 +15,13 @@ import java.io.IOException;
  * @since : 0.1.0
  **/
 @WebFilter(urlPatterns = "/*")
-public class DefaultFilter implements Filter {
+public class DefaultFilter extends HttpFilter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        Configure.getInstance().getSession();
-        System.out.println("Init Filter !");
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        filterChain.doFilter(servletRequest, servletResponse);
-        HttpServletResponse resp = (HttpServletResponse) servletResponse;
+    protected void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws IOException, ServletException {
         resp.addHeader("Access-Control-Allow-Origin", "*");
         resp.addHeader("Access-Control-Allow-Methods", "DELETE,PUT");
         resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
         resp.setContentType("application/json");
-    }
-
-    @Override
-    public void destroy() {
-        System.out.println("Destroyed Filter !");
+        chain.doFilter(req, resp);
     }
 }
