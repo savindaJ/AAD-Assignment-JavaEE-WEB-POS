@@ -22,8 +22,8 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("do post");
         Jsonb jsonb = JsonbBuilder.create();
-        String json = jsonb.toJson(req.getReader(), UserDTO.class);
-        System.out.println(json);
+        UserDTO userDTO = jsonb.fromJson(req.getReader(), UserDTO.class);
+        System.out.println(userDTO);
     }
 
     @Override
