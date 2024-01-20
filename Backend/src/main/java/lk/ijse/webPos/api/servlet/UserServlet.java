@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.webPos.dto.UserDTO;
+import lk.ijse.webPos.util.RespMessage;
 
 import java.io.IOException;
 
@@ -24,7 +25,7 @@ public class UserServlet extends HttpServlet {
         Jsonb jsonb = JsonbBuilder.create();
         UserDTO userDTO = jsonb.fromJson(req.getReader(), UserDTO.class);
         System.out.println(userDTO);
-        resp.getWriter().println("Hello");
+        resp.getWriter().write(new RespMessage().createMassage("200", "success", null));
     }
 
     @Override
