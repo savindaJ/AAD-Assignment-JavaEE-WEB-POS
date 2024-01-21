@@ -10,7 +10,7 @@ import java.util.List;
  * @since : 0.1.0
  **/
 public interface CrudDAO <T,J> extends SuperDAO{
-    boolean save(T dto) throws Exception;
+    boolean save(T entity) throws Exception;
     boolean update(T dto) throws Exception;
     boolean delete(J id);
     List<T> getAll();

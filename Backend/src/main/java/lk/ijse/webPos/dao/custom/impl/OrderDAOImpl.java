@@ -18,10 +18,10 @@ public class OrderDAOImpl implements OrderDAO {
     private Session session;
 
     @Override
-    public boolean save(Orders dto) throws Exception {
+    public boolean save(Orders entity) throws Exception {
         try {
             Transaction transaction = session.beginTransaction();
-            Serializable save = session.save(dto);
+            Serializable save = session.save(entity);
             transaction.commit();
             session.close();
             return save!=null;

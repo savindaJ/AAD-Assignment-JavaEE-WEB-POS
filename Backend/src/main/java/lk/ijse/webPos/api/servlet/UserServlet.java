@@ -50,14 +50,14 @@ public class UserServlet extends HttpServlet {
             }
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write(new RespMessage().createMassage("500", "fail", null));
+            resp.getWriter().write(new RespMessage().createMassage("500", e.getLocalizedMessage(), null));
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("do post");
-        Jsonb jsonb = JsonbBuilder.create();
+        \
         UserDTO userDTO = new UserDTO("", "", req.getParameter("email"), req.getParameter("password"));
         System.out.println(userDTO);
         resp.getWriter().write(new RespMessage().createMassage("200", "success", null));
