@@ -57,7 +57,6 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("do post");
-        \
         UserDTO userDTO = new UserDTO("", "", req.getParameter("email"), req.getParameter("password"));
         System.out.println(userDTO);
         resp.getWriter().write(new RespMessage().createMassage("200", "success", null));
