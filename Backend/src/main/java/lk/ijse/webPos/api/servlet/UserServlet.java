@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
             }
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write(new RespMessage().createMassage("500", e.getLocalizedMessage(), null));
+            resp.getWriter().write(new RespMessage().createMassage("500", "Already Exits User Please Try Again !", null));
         }
     }
 
