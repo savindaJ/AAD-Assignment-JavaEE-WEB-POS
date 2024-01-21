@@ -44,8 +44,10 @@ public class UserServlet extends HttpServlet {
         try {
             boolean isAdded = userBO.addUser(userDTO);
             if (isAdded) {
+                resp.setStatus(HttpServletResponse.SC_CREATED);
                 resp.getWriter().write(new RespMessage().createMassage("200", "success", null));
             } else {
+                resp.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
                 resp.getWriter().write(new RespMessage().createMassage("500", "fail", null));
             }
         } catch (Exception e) {
@@ -58,7 +60,24 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("do post");
         UserDTO userDTO = new UserDTO("", "", req.getParameter("email"), req.getParameter("password"));
-        System.out.println(userDTO);
-        resp.getWriter().write(new RespMessage().createMassage("200", "success", null));
+        if (userDTO.getEmail().isEmpty() || userDTO.getPassword().isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(new RespMessage().createMassage("400", "Bad Request !", null));
+            return;
+        }
+
+        try {
+            boolean isChecked = userBO.checkUser(userDTO);
+            if (isChecked) {
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().write(new RespMessage().createMassage("200", "success", null));
+            } else {
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                resp.getWriter().write(new RespMessage().createMassage("500", "fail", null));
+            }
+        } catch (Exception e) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().write(new RespMessage().createMassage("500", e.getLocalizedMessage(), null));
+        }
     }
 }
