@@ -1,7 +1,3 @@
-$(".btnEdit").on('click', () => {
-    console.log("edit")
-});
-
 $('#save-customer').on('click', function () {
     $.ajax({
         url: baseUrl + "customer",
