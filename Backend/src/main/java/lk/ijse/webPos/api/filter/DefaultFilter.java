@@ -17,6 +17,11 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "/*")
 public class DefaultFilter extends HttpFilter {
     @Override
+    public void init() throws ServletException {
+        Configure.getInstance().getSession();
+    }
+
+    @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws IOException, ServletException {
         resp.addHeader("Access-Control-Allow-Origin", "*");
         resp.addHeader("Access-Control-Allow-Methods", "DELETE,PUT,GET");
