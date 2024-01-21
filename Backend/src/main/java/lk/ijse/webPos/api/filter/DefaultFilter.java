@@ -19,7 +19,7 @@ public class DefaultFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws IOException, ServletException {
         resp.addHeader("Access-Control-Allow-Origin", "*");
-        resp.addHeader("Access-Control-Allow-Methods", "DELETE,PUT");
+        resp.addHeader("Access-Control-Allow-Methods", "DELETE,PUT,GET");
         resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
         resp.setContentType("application/json");
         chain.doFilter(req, resp);
