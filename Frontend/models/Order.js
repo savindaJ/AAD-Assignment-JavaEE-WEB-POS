@@ -1,6 +1,6 @@
 let order = {
-    oid:"",
-    date:"",
-    customerID:"",
-    orderDetails:[]
+    oid: "",
+    date: "",
+    customerID: "",
+    orderDetails: []
 }

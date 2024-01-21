@@ -15,7 +15,7 @@ let finalTotal = 0;
 
 let final = 0;
 
-$('#txtOrderId').prop('disabled',true);
+$('#txtOrderId').prop('disabled', true);
 
 $('#btnClear').on('click', function () {
     clearAll();
@@ -204,14 +204,14 @@ function getNextOrderId() {
     $.ajax({
         url: baseUrl + 'order',
         type: 'get',
-        dataType : 'json',
-        success:function (res) {
+        dataType: 'json',
+        success: function (res) {
             $("#txtOrderId").val(res.message);
             $('#txtOrderId').css("border", "2px solid green");
-            $('#selCusId').prop('disabled',false);
-            $('#txtOrderId').prop('disabled',true);
+            $('#selCusId').prop('disabled', false);
+            $('#txtOrderId').prop('disabled', true);
         },
-        error:function (err) {
+        error: function (err) {
             let responseJson = JSON.parse(err.responseText);
             Swal.fire({
                 position: "top-end",

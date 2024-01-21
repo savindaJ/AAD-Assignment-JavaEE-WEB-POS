@@ -1,9 +1,9 @@
-function setStatus(){
+function setStatus() {
     $.ajax({
         method: 'GET',
         url: baseUrl,
         dataType: 'json',
-        success: function(res){
+        success: function (res) {
 
             for (const re of res.data) {
                 $('#income').text(re.income);
@@ -13,7 +13,7 @@ function setStatus(){
                 $('#finishOrders').text(re.orderDetailCount);
             }
         },
-        error: function(err){
+        error: function (err) {
             let error = JSON.parse(err.responseText);
             console.log(error.message);
         }

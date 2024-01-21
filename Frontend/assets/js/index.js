@@ -149,7 +149,7 @@ nav_item.addEventListener("click", function () {
     main_root.style.transitionDuration = `1s`;
 });
 
-function setDefault(){
+function setDefault() {
     nav_customer_txt.style.fontSize = `20px`;
     nav_customer_txt.style.color = `black`;
 

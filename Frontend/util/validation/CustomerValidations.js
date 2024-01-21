@@ -24,7 +24,7 @@ function clearCustomerInputFields() {
     $("#customer-gmail").focus();
 }
 
-function clearUpdateFiald(){
+function clearUpdateFiald() {
     $("#upCID,#upCName,#upCAddress,#upCTp").val("");
     $("#upCTp").focus();
     $("#upCID,#upCName,#upCAddress,#upCTp").css("border", "1px solid #ced4da");

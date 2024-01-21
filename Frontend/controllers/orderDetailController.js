@@ -1,9 +1,9 @@
-function loadAllOrderDetails(){
+function loadAllOrderDetails() {
     $.ajax({
-        url:baseUrl+'orderDetail',
-        type:'get',
-        dataType:'json',
-        success:function (res) {
+        url: baseUrl + 'orderDetail',
+        type: 'get',
+        dataType: 'json',
+        success: function (res) {
             $('#order-detail-body').empty();
             for (const detail of res.data) {
 
@@ -17,7 +17,7 @@ function loadAllOrderDetails(){
 
             }
         },
-        error:function (err) {
+        error: function (err) {
             let mes = JSON.parse(err.responseText);
             alert(mes.message);
         }

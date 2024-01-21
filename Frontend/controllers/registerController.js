@@ -18,9 +18,9 @@ $('#btn-signUp').on('click', function () {
     $.ajax({
         url: baseUrl + 'user',
         type: 'post',
-        contentType:'application/json',
-        data:JSON.stringify(user),
-        success:function (res) {
+        contentType: 'application/json',
+        data: JSON.stringify(user),
+        success: function (res) {
             let timerInterval;
             Swal.fire({
                 title: "Registration Successfully, Please Wait...",
@@ -41,7 +41,7 @@ $('#btn-signUp').on('click', function () {
                 /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer && res.message === 'success') {
                     window.location.href = "../index.html";
-                }else {
+                } else {
                     const Toast = Swal.mixin({
                         toast: true,
                         position: "top-end",
@@ -60,8 +60,8 @@ $('#btn-signUp').on('click', function () {
                 }
             });
         },
-        error:function (err) {
-            let obj  = JSON.parse(err.responseText);
+        error: function (err) {
+            let obj = JSON.parse(err.responseText);
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",

@@ -9,10 +9,10 @@ $('#btn-sign-in').on('click', function () {
 
     $.ajax({
         url: baseUrl + 'user',
-        type:'get',
-        dataType:'json',
+        type: 'get',
+        dataType: 'json',
         data: myUser,
-        success:function (res) {
+        success: function (res) {
             let timerInterval;
             Swal.fire({
                 title: "Login SuccessFull !!!, Please Wait...",
@@ -33,12 +33,12 @@ $('#btn-sign-in').on('click', function () {
                 /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer && res.message === 'success') {
                     window.location.href = "pages/main.html";
-                }else {
+                } else {
                     alert('invalid !');
                 }
             });
         },
-        error:function (err) {
+        error: function (err) {
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",

@@ -1,4 +1,4 @@
-const orderId_regex =/^(ORD-)[0-9]{3}$/;
+const orderId_regex = /^(ORD-)[0-9]{3}$/;
 
 $('#btnAddOrder').prop("disabled", true);
 
@@ -29,7 +29,7 @@ function clearAll() {
     $('#btnAddOrder').prop("disabled", true);
 }
 
-function clearBill(){
+function clearBill() {
     $('#txtBalnce ,#txtCash ,#txtDiscount').val('');
     $('#total ,#subTotal').text('00.0');
     $('#btnAddOrder').prop("disabled", true);

@@ -16,13 +16,13 @@ update_validity.push({field: $("#upItemdesc"), regEx: description_regx});
 update_validity.push({field: $("#upUnitPrice"), regEx: price_regex});
 update_validity.push({field: $("#upQty"), regEx: qty_regex});
 
-function clearItemTxt(){
+function clearItemTxt() {
     $('#txtItemId,#txtItemdec,#txtItemUnitPrice,#txtItemQty').val('');
     $('#txtItemId,#txtItemdec,#txtItemUnitPrice,#txtItemQty').css("border", "1px solid #ced4da");
     $('#txtItemId').focus();
 }
 
-function clearUpdateTxt(){
+function clearUpdateTxt() {
     $('#upItemId,#upItemdesc,#upUnitPrice,#upQty').val('');
     $('#upItemId,#upItemdesc,#upUnitPrice,#upQty').css("border", "1px solid #ced4da");
     $('#upItemId').focus();

@@ -44,9 +44,9 @@ $('#txt-customer-search').on('keyup', function () {
     if (search === "") {
         $(`#body`).empty();
         getAll();
-    }else{
+    } else {
         $(`#body`).empty();
-        if ($('#select-cus').val()==1){
+        if ($('#select-cus').val() == 1) {
             for (const customer of allCustomer) {
                 if (customer.cusId.includes(search)) {
                     $(`#body`).append(`<tr>
@@ -63,7 +63,7 @@ $('#txt-customer-search').on('keyup', function () {
                              </tr>`);
                 }
             }
-        }else {
+        } else {
             for (const customer of allCustomer) {
                 if (customer.cusName.includes(search) || customer.cusName.includes(capitalise)) {
                     $(`#body`).append(`<tr>
