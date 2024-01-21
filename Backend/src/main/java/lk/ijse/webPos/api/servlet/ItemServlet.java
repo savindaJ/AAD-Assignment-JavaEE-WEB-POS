@@ -87,7 +87,7 @@ public class ItemServlet extends HttpServlet {
         String state = null;
         resp.setContentType("application/json");
         try {
-            if (itemBO.updateItem(new ItemDTO(itemCode, description,unitPrice,qty))) {
+            if (itemBO.updateItem(new ItemDTO(itemCode, description, unitPrice, qty))) {
                 state = message.createMassage("OK", "Item Successfully Updated !", null);
                 resp.setStatus(HttpServletResponse.SC_CREATED);
             } else {

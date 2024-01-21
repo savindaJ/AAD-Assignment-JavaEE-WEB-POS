@@ -9,5 +9,5 @@ import lk.ijse.webPos.entity.User;
  * @date : 1/21/2024
  * @since : 0.1.0
  **/
-public interface UserDAO extends CrudDAO<User,String> {
+public interface UserDAO extends CrudDAO<User, String> {
 }

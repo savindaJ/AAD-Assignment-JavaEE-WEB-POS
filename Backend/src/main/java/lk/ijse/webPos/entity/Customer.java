@@ -29,7 +29,7 @@ public class Customer implements Serializable {
     @Column(name = "customer_salary")
     private Double salary;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Orders> orders = new ArrayList<>();
 
     public Customer(String cusId, String name, String address, Double salary) {

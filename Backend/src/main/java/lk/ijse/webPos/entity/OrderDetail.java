@@ -23,11 +23,11 @@ public class OrderDetail {
     private int qty;
 
     @ManyToOne
-    @JoinColumn(name = "order_id",referencedColumnName = "order_id",insertable = false,updatable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
     private Orders orders;
 
     @ManyToOne
-    @JoinColumn(name = "item_code",referencedColumnName = "item_code",insertable = false,updatable = false)
+    @JoinColumn(name = "item_code", referencedColumnName = "item_code", insertable = false, updatable = false)
     private Item item;
 
     public OrderDetail() {

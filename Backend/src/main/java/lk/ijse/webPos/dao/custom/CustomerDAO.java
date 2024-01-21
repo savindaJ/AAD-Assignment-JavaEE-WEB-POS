@@ -8,6 +8,6 @@ import lk.ijse.webPos.entity.Customer;
  * @date : 1/8/2024
  * @since : 0.1.0
  **/
-public interface CustomerDAO extends CrudDAO<Customer,String> {
+public interface CustomerDAO extends CrudDAO<Customer, String> {
 
 }

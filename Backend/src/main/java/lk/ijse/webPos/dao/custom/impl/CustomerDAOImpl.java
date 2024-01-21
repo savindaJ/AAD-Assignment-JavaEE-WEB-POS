@@ -38,7 +38,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             return true;
         } catch (Exception e) {
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -53,7 +53,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             return true;
         } catch (Exception e) {
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }

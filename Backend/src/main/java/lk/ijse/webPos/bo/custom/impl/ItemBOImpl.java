@@ -18,13 +18,14 @@ import java.util.List;
 public class ItemBOImpl implements ItemBO {
 
     ItemDAO itemDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.ITEMDAO);
+
     @Override
     public ArrayList<ItemDTO> getAllItems() {
         itemDAO.setSession(Configure.getInstance().getSession());
         List<Item> all = itemDAO.getAll();
         ArrayList<ItemDTO> list = new ArrayList<>();
         for (Item item : all) {
-            list.add(new ItemDTO(item.getItemCode(),item.getDescription(),item.getUnitPrice(),item.getQty()));
+            list.add(new ItemDTO(item.getItemCode(), item.getDescription(), item.getUnitPrice(), item.getQty()));
         }
         return list;
     }

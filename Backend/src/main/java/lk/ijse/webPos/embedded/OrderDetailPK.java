@@ -12,9 +12,9 @@ import java.io.Serializable;
 @Embeddable
 public class OrderDetailPK implements Serializable {
 
-    @Column(name = "order_id" ,length = 50)
+    @Column(name = "order_id", length = 50)
     private String orderId;
-    @Column(name = "item_code" ,length = 50)
+    @Column(name = "item_code", length = 50)
     private String itemId;
 
     public OrderDetailPK() {

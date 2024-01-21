@@ -24,13 +24,14 @@ public class Configure {
                 .buildSessionFactory();
     }
 
-    private Configure(){}
+    private Configure() {
+    }
 
-    public static Configure getInstance(){
+    public static Configure getInstance() {
         return configure == null ? new Configure() : configure;
     }
 
-    public Session getSession(){
+    public Session getSession() {
         return factory.openSession();
     }
 }

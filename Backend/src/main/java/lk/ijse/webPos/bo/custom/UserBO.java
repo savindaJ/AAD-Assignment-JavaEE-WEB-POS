@@ -10,5 +10,6 @@ import lk.ijse.webPos.dto.UserDTO;
  **/
 public interface UserBO extends SuperBO {
     boolean addUser(UserDTO userDTO) throws Exception;
+
     boolean checkUser(UserDTO userDTO);
 }

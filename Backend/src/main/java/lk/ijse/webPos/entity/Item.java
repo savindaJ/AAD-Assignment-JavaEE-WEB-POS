@@ -18,25 +18,25 @@ import java.util.List;
 @Data
 public class Item {
     @Id
-    @Column(name = "item_code" ,length = 50)
+    @Column(name = "item_code", length = 50)
     private String itemCode;
-    @Column(name = "item_description" ,length = 50)
+    @Column(name = "item_description", length = 50)
     private String description;
     @Column(name = "item_price")
     private Double unitPrice;
     @Column(name = "item_quantity")
     private Integer qty;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "item")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "item")
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
     Item() {
     }
 
     public Item(String itemCode, String description, Double price, Integer quantity) {
-        this.itemCode=itemCode;
-        this.description=description;
-        this.unitPrice=price;
-        this.qty=quantity;
+        this.itemCode = itemCode;
+        this.description = description;
+        this.unitPrice = price;
+        this.qty = quantity;
     }
 }

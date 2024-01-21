@@ -28,7 +28,7 @@ public class ItemDAOImpl implements ItemDAO {
             transaction.commit();
             session.close();
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw Exception.class.cast(e);
         }
     }
@@ -41,7 +41,7 @@ public class ItemDAOImpl implements ItemDAO {
             transaction.commit();
 //            session.close();
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -55,7 +55,7 @@ public class ItemDAOImpl implements ItemDAO {
             transaction.commit();
             session.close();
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -82,6 +82,6 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public void setSession(Session session) {
-        this.session=session;
+        this.session = session;
     }
 }

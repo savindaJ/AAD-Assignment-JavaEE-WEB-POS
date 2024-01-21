@@ -8,6 +8,6 @@ import lk.ijse.webPos.entity.Orders;
  * @date : 1/13/2024
  * @since : 0.1.0
  **/
-public interface OrderDAO extends CrudDAO<Orders,String> {
+public interface OrderDAO extends CrudDAO<Orders, String> {
     String getLastOrderId();
 }

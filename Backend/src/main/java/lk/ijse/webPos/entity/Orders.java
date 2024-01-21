@@ -22,7 +22,7 @@ import java.util.List;
 @Data
 public class Orders {
     @Id
-    @Column(name = "order_id",length = 50)
+    @Column(name = "order_id", length = 50)
     private String orderID;
     @Column(name = "order_date")
     @CreationTimestamp
@@ -31,7 +31,7 @@ public class Orders {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "orders")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orders")
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
     public Orders(String orderId, Customer customer, List<OrderDetail> orderDetails) {

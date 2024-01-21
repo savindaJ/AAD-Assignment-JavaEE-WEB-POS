@@ -24,8 +24,8 @@ public class OrderDAOImpl implements OrderDAO {
             Serializable save = session.save(entity);
             transaction.commit();
             session.close();
-            return save!=null;
-        }catch (Exception e) {
+            return save != null;
+        } catch (Exception e) {
             throw new Exception(e);
         }
     }

@@ -19,6 +19,7 @@ import java.util.List;
 public class CustomerBOImpl implements CustomerBO {
 
     CustomerDAO customerDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CUSTOMERDAO);
+
     @Override
     public boolean saveCustomer(CustomerDTO customerDTO) throws Exception {
         customerDAO.setSession(Configure.getInstance().getSession());

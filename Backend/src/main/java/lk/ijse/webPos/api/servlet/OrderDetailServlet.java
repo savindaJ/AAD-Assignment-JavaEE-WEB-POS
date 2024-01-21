@@ -34,6 +34,6 @@ public class OrderDetailServlet extends HttpServlet {
         ArrayList<OrderDetailDTO> list = orderDetailBO.getAllOrderDetails();
         resp.setContentType("application/json");
         resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-        resp.getWriter().write(new RespMessage<OrderDetailDTO> ().createMassage("200", "Success", list));
+        resp.getWriter().write(new RespMessage<OrderDetailDTO>().createMassage("200", "Success", list));
     }
 }

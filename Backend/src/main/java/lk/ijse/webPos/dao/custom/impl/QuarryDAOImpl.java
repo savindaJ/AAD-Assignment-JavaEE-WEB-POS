@@ -28,7 +28,7 @@ public class QuarryDAOImpl implements QuarryDAO {
     public ArrayList<OrderDetailDTO> getAllOrderDetails() {
         ArrayList<OrderDetailDTO> details = new ArrayList<>();
         Transaction transaction = session.beginTransaction();
-        List <Object[]> list = session.createNativeQuery("select\n" +
+        List<Object[]> list = session.createNativeQuery("select\n" +
                 "    o.order_id ,\n" +
                 "    o.customer_id ,\n" +
                 "    od.item_code,\n" +
@@ -39,7 +39,7 @@ public class QuarryDAOImpl implements QuarryDAO {
                 "order_detail od\n" +
                 "ON o.order_id = od.order_id ORDER BY o.order_date DESC LIMIT 40").list();
         transaction.commit();
-        for (Object[] objects : list){
+        for (Object[] objects : list) {
             details.add(new OrderDetailDTO(
                     (String) objects[0],
                     (String) objects[1],
@@ -68,6 +68,6 @@ public class QuarryDAOImpl implements QuarryDAO {
                 "item i\n" +
                 "ON od.item_code = i.item_code").getSingleResult();
         transaction.commit();
-        return new StatusDTO(cusCount,orderCount,itemCount,detailCount,income);
+        return new StatusDTO(cusCount, orderCount, itemCount, detailCount, income);
     }
 }
