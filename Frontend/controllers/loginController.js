@@ -7,8 +7,6 @@ $('#btn-sign-in').on('click', function () {
         password: pw
     }
 
-    const json = JSON.stringify(myUser);
-
     $.ajax({
         url: baseUrl + 'user',
         type:'get',
