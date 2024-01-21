@@ -61,7 +61,22 @@ $('#btn-signUp').on('click', function () {
             });
         },
         error:function (err) {
-            console.log(err);
+            let obj  = JSON.parse(err.responseText);
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "error",
+                title: obj.message
+            });
         }
     });
 
