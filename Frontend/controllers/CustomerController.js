@@ -164,7 +164,7 @@ $('#updateCustomer').on('click', function () {
             clearUpdateFiald();
         },
         error: function (err) {
-            alert("Bad Request !")
+            alert(err.responseText);
         }
     })
 });
