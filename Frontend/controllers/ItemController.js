@@ -221,8 +221,8 @@ $('#txtSearchItem').on('keyup', function () {
     $(`#Item-body`).empty();
 
     for (let item of allItem) {
-        if ($("#itemSearch").val() === "Code") {
-            if (item.code.indexOf($("#txtSearchItem").val()) !== -1) {
+        if ($("#itemSearch").val() == 1) {
+            if (item.itemCode.indexOf($("#txtSearchItem").val()) !== -1) {
 
                 $("#tblItem > tbody").append($(`#Item-body`).append(`<tr>
                                  <td>${item.itemCode}</td>

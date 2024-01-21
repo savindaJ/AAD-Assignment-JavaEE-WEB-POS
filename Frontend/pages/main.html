@@ -173,15 +173,14 @@
 
                         <div class="col-12 col-md-6 ">
                             <input class="form-control me-2 mb-2 mb-lg-0 shadow-sm" type=""
-                                   placeholder="Enter Name/TP/Address"
-                                   aria-label="Search" id="txtSearch" style="height: 30px">
+                                   placeholder="ID = number / Name = text"
+                                   aria-label="Search" id="txt-customer-search" style="height: 40px">
                         </div>
                         <div class="col-12 col-md-3 ">
-                            <select class="btn btn-warning dropdown-toggle me-2 mb-2 mb-lg-0" type="button"
-                                    id="cusSearch"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                <option><a class="dropdown-item" href="#">Customer Id</a></option>
-                                <option><a class="dropdown-item" href="#">Name</a></option>
+                            <select id="select-cus" class="form-select shadow-sm" aria-label="Default select example"
+                                    style="height: 40px; width: 150px">
+                                <option value="1">Customer ID</option>
+                                <option value="2">Customer Name</option>
                             </select>
                         </div>
                     </form>
@@ -339,6 +338,14 @@
                                                 <option></option>
                                             </select>
                                         </div>
+                                       <!-- <input id="color" list="suggestions">
+                                        <datalist id="suggestions">
+                                            <option value="Black">
+                                            <option value="Red">
+                                            <option value="Green">
+                                            <option value="Blue">
+                                            <option value="White">
+                                        </datalist>-->
                                     </div>
                                     <div class="col-6">
                                         <div class="mb-3">
@@ -707,10 +714,10 @@
 <script src="../assets/js/bootstrap.bundle.js"></script>
 <script src="../assets/js/index.js"></script>
 <script src="../db/db.js"></script>
+<script src="../controllers/PurchaseOrderController.js"></script>
 <script src="../controllers/CustomerController.js"></script>
 <script src="../controllers/DashboardController.js"></script>
 <script src="../controllers/ItemController.js"></script>
-<script src="../controllers/PurchaseOrderController.js"></script>
 <script src="../models/Customer.js"></script>
 <script src="../models/Item.js"></script>
 <script src="../models/Order.js"></script>

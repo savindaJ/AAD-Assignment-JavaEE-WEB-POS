@@ -1,3 +1,4 @@
+let allCustomer = [];
 $('#save-customer').on('click', function () {
     $.ajax({
         url: baseUrl + "customer",
@@ -35,6 +36,56 @@ $('#save-customer').on('click', function () {
     });
 });
 
+$('#txt-customer-search').on('keyup', function () {
+    let search = $(this).val();
+
+    let capitalise = search.charAt(0).toUpperCase() + search.slice(1);
+
+    if (search === "") {
+        $(`#body`).empty();
+        getAll();
+    }else{
+        $(`#body`).empty();
+        if ($('#select-cus').val()==1){
+            for (const customer of allCustomer) {
+                if (customer.cusId.includes(search)) {
+                    $(`#body`).append(`<tr>
+                                <td>${customer.cusId}</td>
+                                <td>${customer.cusName}</td>
+                                <td>${customer.address}</td>
+                                <td>${customer.salary}</td>
+                                <td><button type="button" class="btn btn-primary btn-sm me-2 btnEdit" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger me-3 btn-sm delete">Delete</button></td>
+
+                             </tr>`);
+                }
+            }
+        }else {
+            for (const customer of allCustomer) {
+                if (customer.cusName.includes(search) || customer.cusName.includes(capitalise)) {
+                    $(`#body`).append(`<tr>
+                                <td>${customer.cusId}</td>
+                                <td>${customer.cusName}</td>
+                                <td>${customer.address}</td>
+                                <td>${customer.salary}</td>
+                                <td><button type="button" class="btn btn-primary btn-sm me-2 btnEdit" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger me-3 btn-sm delete">Delete</button></td>
+
+                             </tr>`);
+                }
+            }
+        }
+
+    }
+
+});
+
 function getAll() {
 
     $(`#body`).empty();
@@ -52,6 +103,7 @@ function getAll() {
         dataType: "json",
         success: function (resp) {
             $(`#body`).empty();
+            allCustomer = resp.data;
             loadCusIds(resp.data);
             setStatus();
             for (const customer of resp.data) {
@@ -124,6 +176,10 @@ function getAll() {
         }
     })
 }
+
+$('#getAllCustomer').on('click', function () {
+    getAll();
+});
 
 $('#updateCustomer').on('click', function () {
     const customer = {
