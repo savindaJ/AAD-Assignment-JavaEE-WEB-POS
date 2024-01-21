@@ -1,19 +1,19 @@
 $('#btn-sign-in').on('click', function () {
-    let email = $('#txt-email').val();
+    let txtEmail = $('#txt-email').val();
     let pw = $('#txt-pw').val();
 
-    console.log('text inputs : ',email,pw);
-
-    const user = {
-        email: email,
+    const myUser = {
+        email: txtEmail,
         password: pw
     }
+
+    const json = JSON.stringify(myUser);
 
     $.ajax({
         url: baseUrl + 'user',
         type:'get',
-        contentType:'application/json',
-        data: JSON.stringify(user),
+        dataType:'json',
+        data: myUser,
         success:function (res) {
             let timerInterval;
             Swal.fire({

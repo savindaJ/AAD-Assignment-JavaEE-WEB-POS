@@ -18,6 +18,7 @@ $('#btn-signUp').on('click', function () {
     $.ajax({
         url: baseUrl + 'user',
         type: 'post',
+        contentType:'application/json',
         data:JSON.stringify(user),
         success:function (res) {
             let timerInterval;
