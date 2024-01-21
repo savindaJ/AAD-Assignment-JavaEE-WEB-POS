@@ -43,7 +43,11 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getItem(String id) {
-        return null;
+        Transaction transaction = session.beginTransaction();
+        User user = session.get(User.class, id);
+        transaction.commit();
+        session.close();
+        return user;
     }
 
     @Override

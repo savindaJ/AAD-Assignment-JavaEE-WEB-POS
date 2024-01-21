@@ -21,4 +21,14 @@ public class UserBOImpl implements UserBO {
         userDAO.setSession(Configure.getInstance().getSession());
         return userDAO.save(new User(userDTO.getEmail(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getPassword()));
     }
+
+    @Override
+    public boolean checkUser(UserDTO userDTO) {
+        userDAO.setSession(Configure.getInstance().getSession());
+        User user = userDAO.getItem(userDTO.getEmail());
+        if (user == null) {
+            return false;
+        }
+        return user.getPassword().equals(userDTO.getPassword());
+    }
 }
