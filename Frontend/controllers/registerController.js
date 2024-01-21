@@ -23,7 +23,7 @@ $('#btn-signUp').on('click', function () {
         success:function (res) {
             let timerInterval;
             Swal.fire({
-                title: "Send Redirect Request, Please Wait...",
+                title: "Registration Successfully, Please Wait...",
                 html: "I will close in <b></b> milliseconds.",
                 timer: 3000,
                 timerProgressBar: true,
