@@ -1,9 +1,6 @@
 package lk.ijse.webPos.config;
 
-import lk.ijse.webPos.entity.Customer;
-import lk.ijse.webPos.entity.Item;
-import lk.ijse.webPos.entity.OrderDetail;
-import lk.ijse.webPos.entity.Orders;
+import lk.ijse.webPos.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -23,6 +20,7 @@ public class Configure {
                 .addAnnotatedClass(Item.class)
                 .addAnnotatedClass(Orders.class)
                 .addAnnotatedClass(OrderDetail.class)
+                .addAnnotatedClass(User.class)
                 .buildSessionFactory();
     }
 
