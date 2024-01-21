@@ -31,7 +31,7 @@ $('#btn-sign-in').on('click', function () {
                 }
             }).then((result) => {
                 /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
+                if (result.dismiss === Swal.DismissReason.timer && res.message === 'success') {
                     window.location.href = "pages/main.html";
                 }
             });
