@@ -15,7 +15,7 @@ $('#btn-sign-in').on('click', function () {
         success:function (res) {
             let timerInterval;
             Swal.fire({
-                title: "Send Redirect Request, Please Wait...",
+                title: "Login SuccessFull !!!, Please Wait...",
                 html: "I will close in <b></b> milliseconds.",
                 timer: 2000,
                 timerProgressBar: true,
