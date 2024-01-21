@@ -39,8 +39,24 @@ $('#btn-signUp').on('click', function () {
                 }
             }).then((result) => {
                 /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
+                if (result.dismiss === Swal.DismissReason.timer && res.message === 'success') {
                     window.location.href = "../index.html";
+                }else {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "error",
+                        title: res.message
+                    });
                 }
             });
         },
