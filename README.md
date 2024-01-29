@@ -48,7 +48,7 @@ Sample Test Account:
 - FirstName: Savinda
 - LastName: Jayasekara
 - Email: thantrige32@gmail.com
-- Password: abcd1234@
+- Password: abcd1234@ (`This password pattern is important !`)
 
 
 ## Technologies Used
