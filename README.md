@@ -90,7 +90,7 @@ Sample Test Account:
 2. Clone the repository: `git clone [repository-url]`
 3. Configure your database settings in `Backend/src/main/resources/hibernate.cfg.xml`.
 4. Build and deploy the project using your preferred IDE or build tool.
-5. Run Frontend Goto `Frontend/index.html` and run this file your idea.
+5. Run Frontend Goto `Frontend/index.html` and run this file your IDE.
 
 ## Database Configuration
 
