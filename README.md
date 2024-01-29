@@ -8,6 +8,49 @@ This Java EE WEB-POS project is designed to improve my knowledge of Java Enterpr
 
 Current Version: 1.4.12
 
+# Login and Registration
+
+To access the full functionality of this Web POS project, users need to register for an account and log in. Follow the steps below to get started:
+
+## Registration
+
+1. Navigate to the registration page by clicking on the "Register" link on the login page.
+
+2. Fill out the required information, including:
+  - FirstName
+  - LastName
+  - Email
+  - Password
+
+1. Click the "Register" button to create your account.
+
+2. Upon successful registration, you will be redirected to the login page.
+
+## Login
+
+1. Enter your registered username or email and password on the login page.
+
+2. Click the "Login" button to access the system.
+
+## Important Notes
+
+- Each user must register for a separate account to use the system.
+
+- If you encounter any issues during the registration or login process, please contact [support email or other contact information] for assistance.
+
+- Make sure to keep your login credentials secure and do not share them with others.
+
+## Contributing
+
+If you are contributing to the project, consider providing sample user credentials for testing purposes. You can include a section in your README with test account information for users who want to explore the project without registering.
+
+Sample Test Account:
+- FirstName: Savinda
+- LastName: Jayasekara
+- Email: thantrige32@gmail.com
+- Password: abcd1234@
+
+
 ## Technologies Used
 
 ### Frontend
