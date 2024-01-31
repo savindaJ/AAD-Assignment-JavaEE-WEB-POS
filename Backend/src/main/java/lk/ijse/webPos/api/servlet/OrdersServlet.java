@@ -31,7 +31,6 @@ public class OrdersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
         resp.getWriter().write(new RespMessage<>().createMassage("NOT", nextOrderID(), null));
     }
 

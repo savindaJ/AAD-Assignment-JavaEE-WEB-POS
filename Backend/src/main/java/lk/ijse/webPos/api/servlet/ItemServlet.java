@@ -2,6 +2,7 @@ package lk.ijse.webPos.api.servlet;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -48,12 +49,9 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String itemCode = req.getParameter("itemCode");
-        String description = req.getParameter("description");
-        String unitPrice = req.getParameter("unitPrice");
-        String qty = req.getParameter("qty");
-        System.out.println(qty + " " + unitPrice + " " + description + " " + itemCode);
-        ItemDTO itemDTO = new ItemDTO(itemCode, description, Double.parseDouble(unitPrice), Integer.parseInt(qty));
+
+        ItemDTO itemDTO = JsonbBuilder.create().fromJson(req.getReader(), ItemDTO.class);
+
         RespMessage<ItemDTO> message = new RespMessage<>();
         String state = null;
         resp.setContentType("application/json");
@@ -75,19 +73,14 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
-        String itemCode = jsonObject.getString("itemCode");
-        String description = jsonObject.getString("description");
-        Double unitPrice = jsonObject.getJsonNumber("unitPrice").doubleValue();
-        Integer qty = jsonObject.getJsonNumber("qty").intValue();
 
-        System.out.println(qty + " " + unitPrice + " " + description + " " + itemCode);
+        ItemDTO itemDTO = JsonbBuilder.create().fromJson(req.getReader(), ItemDTO.class);
 
         RespMessage<ItemDTO> message = new RespMessage<>();
         String state = null;
         resp.setContentType("application/json");
         try {
-            if (itemBO.updateItem(new ItemDTO(itemCode, description, unitPrice, qty))) {
+            if (itemBO.updateItem(itemDTO)) {
                 state = message.createMassage("OK", "Item Successfully Updated !", null);
                 resp.setStatus(HttpServletResponse.SC_CREATED);
             } else {

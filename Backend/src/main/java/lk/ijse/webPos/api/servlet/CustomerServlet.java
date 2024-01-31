@@ -3,6 +3,7 @@ package lk.ijse.webPos.api.servlet;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
+import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import lk.ijse.webPos.bo.custom.CustomerBO;
 import lk.ijse.webPos.dto.CustomerDTO;
 import lk.ijse.webPos.entity.Customer;
 import lk.ijse.webPos.util.RespMessage;
+import lk.ijse.webPos.util.ValidationUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,14 +56,18 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        id = req.getParameter("id");
-        name = req.getParameter("name");
-        address = req.getParameter("address");
-        salary = Double.valueOf(req.getParameter("salary"));
+        CustomerDTO customerDTO = JsonbBuilder.create().fromJson(req.getReader(), CustomerDTO.class);
+
+        if (ValidationUtil.validate(customerDTO.getCusId(), customerDTO.getCusName(), customerDTO.getAddress(), customerDTO.getSalary())) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
+            return;
+        }
+
         String ok;
         RespMessage<Customer> message = new RespMessage<>();
         try {
-            if (customerBO.saveCustomer(new CustomerDTO(id, name, address, salary))) {
+            if (customerBO.saveCustomer(customerDTO)) {
                 ok = message.createMassage("OK", "Customer Saved Successfully !", null);
                 resp.setStatus(HttpServletResponse.SC_CREATED);
             } else {
@@ -77,13 +83,12 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private boolean setValues(HttpServletRequest req) throws IOException {
-        JsonReader reader = Json.createReader(req.getReader());
-        JsonObject jsonObject = reader.readObject();
+        CustomerDTO customerDTO = JsonbBuilder.create().fromJson(req.getReader(), CustomerDTO.class);
         try {
-            id = jsonObject.getString("id");
-            name = jsonObject.getString("name");
-            address = jsonObject.getString("address");
-            salary = Double.valueOf(String.valueOf(jsonObject.getJsonNumber("salary")));
+            id = customerDTO.getCusId();
+            name = customerDTO.getCusName();
+            address = customerDTO.getAddress();
+            salary = customerDTO.getSalary();
             return true;
         } catch (Exception e) {
             return false;
@@ -92,7 +97,6 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("put");
         if (setValues(req)) {
             RespMessage<Customer> message = new RespMessage<>();
             String ok;

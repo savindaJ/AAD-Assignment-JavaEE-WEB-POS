@@ -31,7 +31,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("do post");
         Jsonb jsonb = JsonbBuilder.create();
         UserDTO userDTO = jsonb.fromJson(req.getReader(), UserDTO.class);
 
@@ -58,7 +57,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("do post");
         UserDTO userDTO = new UserDTO("", "", req.getParameter("email"), req.getParameter("password"));
         if (userDTO.getEmail().isEmpty() || userDTO.getPassword().isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
