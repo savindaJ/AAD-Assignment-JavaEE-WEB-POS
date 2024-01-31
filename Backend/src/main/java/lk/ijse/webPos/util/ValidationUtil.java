@@ -31,7 +31,6 @@ public class ValidationUtil {
         try{
             for (Object dto : dtos) {
                 if (dto instanceof CustomerDTO) {
-                    System.out.println("Customer");
                     CustomerDTO customerDTO = (CustomerDTO) dto;
                     if (customerDTO.getCusId().matches(customerRegex.get(0))
                             && customerDTO.getCusName().matches(customerRegex.get(1))
