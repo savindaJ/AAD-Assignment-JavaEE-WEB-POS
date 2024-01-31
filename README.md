@@ -6,7 +6,7 @@ This Java EE WEB-POS project is designed to improve my knowledge of Java Enterpr
 
 ## Version
 
-Current Version: 1.4.12
+Current Version: 1.6.12
 
 # Login and Registration
 
