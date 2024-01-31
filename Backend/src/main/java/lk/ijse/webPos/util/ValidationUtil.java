@@ -41,7 +41,6 @@ public class ValidationUtil {
                         return false;
                     }
                 } else if (dto instanceof ItemDTO) {
-                    System.out.println("Item");
                     ItemDTO itemDTO = (ItemDTO) dto;
                     if (itemDTO.getItemCode().matches(itemRegex.get(0))
                             && itemDTO.getDescription().matches(itemRegex.get(1))
