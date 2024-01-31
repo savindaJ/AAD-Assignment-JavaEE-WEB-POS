@@ -1,15 +1,18 @@
 let allCustomer = [];
 $('#save-customer').on('click', function () {
+
+    const customer = {
+        cusId: $('#customer-gmail').val(),
+        cusName: $('#customer-name').val(),
+        address: $('#customer-address').val(),
+        salary: $('#customer-tp').val()
+    }
+
     $.ajax({
         url: baseUrl + "customer",
         type: "post",
         dataType: "json",
-        data: {
-            id: $('#customer-gmail').val(),
-            name: $('#customer-name').val(),
-            address: $('#customer-address').val(),
-            salary: $('#customer-tp').val()
-        },
+        data: JSON.stringify(customer),
         success: function (res) {
             getAll();
             clearCustomerInputFields();
@@ -183,8 +186,8 @@ $('#getAllCustomer').on('click', function () {
 
 $('#updateCustomer').on('click', function () {
     const customer = {
-        id: $(`#upCID`).val(),
-        name: $(`#upCName`).val(),
+        cusId: $(`#upCID`).val(),
+        cusName: $(`#upCName`).val(),
         address: $(`#upCAddress`).val(),
         salary: parseInt($(`#upCTp`).val())
     }

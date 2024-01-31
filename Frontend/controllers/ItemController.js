@@ -15,8 +15,8 @@ function updateItem() {
         const json = {
             itemCode: id,
             description: description,
-            unitPrice: parseFloat(unitPrice),
-            qty: parseInt(qty)
+            price: parseFloat(unitPrice),
+            quantity: parseInt(qty)
         }
         $.ajax({
             url: baseUrl + "item",
@@ -57,13 +57,18 @@ $('#btnSaveItem').on('click', function () {
 function saveItem() {
     let itemId = $('#txtItemId').val();
     if (searchItem(itemId.trim()) === undefined) {
+
+        const item = {
+            itemCode: $('#txtItemId').val(),
+            description: $('#txtItemdec').val(),
+            price: parseFloat($('#txtItemQty').val()),
+            quantity: parseInt($('#txtItemUnitPrice').val())
+        }
+
         $.ajax({
-            url: baseUrl + "item", type: 'post', dataType: 'json', data: {
-                itemCode: $('#txtItemId').val(),
-                description: $('#txtItemdec').val(),
-                unitPrice: $('#txtItemQty').val(),
-                qty: $('#txtItemUnitPrice').val()
-            }, success: function (res) {
+            url: baseUrl + "item", type: 'post', dataType: 'json',
+            data: JSON.stringify(item)
+            , success: function (res) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: "top-end",
