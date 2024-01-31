@@ -11,6 +11,7 @@ import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.OrderBO;
 import lk.ijse.webPos.dto.OrderDTO;
 import lk.ijse.webPos.util.RespMessage;
+import lk.ijse.webPos.util.ValidationUtil;
 
 import java.io.IOException;
 
@@ -43,6 +44,12 @@ public class OrdersServlet extends HttpServlet {
         Jsonb jsonb = JsonbBuilder.create();
         OrderDTO orderDTO = jsonb.fromJson(req.getReader(), OrderDTO.class);
 
+        if (ValidationUtil.validateOrderID(orderDTO.getOrderId()) || orderDTO.getCustomerId() == null || orderDTO.getItemList() == null) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
+            return;
+        }
+
         RespMessage<OrderDTO> message = new RespMessage<>();
         String ok;
         try {
@@ -60,24 +67,3 @@ public class OrdersServlet extends HttpServlet {
         resp.getWriter().write(ok);
     }
 }
-
-/*Session session = Configure.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        Customer customer = session.get(Customer.class, customerId);
-
-        List<OrderDetail> orderDetails = new ArrayList<>();
-
-        for (ItemDTO itemDTO : itemList) {
-            OrderDetail orderDetail = new OrderDetail(new OrderDetailPK(orderId,itemDTO.getItemCode()), itemDTO.getQuantity());
-            orderDetails.add(orderDetail);
-        }
-
-        Orders orders = new Orders(orderId,customer, orderDetails);
-        session.save(orders);
-        transaction.commit();
-        session.close();*/
-
-
-
-
-

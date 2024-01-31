@@ -12,6 +12,7 @@ import lk.ijse.webPos.bo.BOFactory;
 import lk.ijse.webPos.bo.custom.ItemBO;
 import lk.ijse.webPos.dto.ItemDTO;
 import lk.ijse.webPos.util.RespMessage;
+import lk.ijse.webPos.util.ValidationUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +37,6 @@ public class ItemServlet extends HttpServlet {
         ArrayList<ItemDTO> list = itemBO.getAllItems();
         RespMessage<ItemDTO> message = new RespMessage<>();
         String state;
-        resp.setContentType("application/json");
         if (list != null) {
             state = message.createMassage("OK", "Item Successfully Loaded !", list);
             resp.setStatus(HttpServletResponse.SC_CREATED);
@@ -49,12 +49,14 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         ItemDTO itemDTO = JsonbBuilder.create().fromJson(req.getReader(), ItemDTO.class);
-
+        if (ValidationUtil.validate(itemDTO.getItemCode(), itemDTO.getDescription(), itemDTO.getPrice(), itemDTO.getQuantity())) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
+            return;
+        }
         RespMessage<ItemDTO> message = new RespMessage<>();
         String state = null;
-        resp.setContentType("application/json");
         boolean b = false;
         try {
             if (itemBO.saveItem(itemDTO)) {
@@ -73,12 +75,14 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         ItemDTO itemDTO = JsonbBuilder.create().fromJson(req.getReader(), ItemDTO.class);
-
+        if (ValidationUtil.validate(itemDTO)) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
+            return;
+        }
         RespMessage<ItemDTO> message = new RespMessage<>();
         String state = null;
-        resp.setContentType("application/json");
         try {
             if (itemBO.updateItem(itemDTO)) {
                 state = message.createMassage("OK", "Item Successfully Updated !", null);
@@ -97,9 +101,13 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String itemCode = req.getParameter("itemCode");
+        if (ValidationUtil.validateItemID(itemCode)) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
+            return;
+        }
         RespMessage<ItemDTO> message = new RespMessage<>();
         String state = null;
-        resp.setContentType("application/json");
         try {
             if (itemBO.deleteItem(itemCode)) {
                 state = message.createMassage("OK", "Item Successfully Deleted !", null);

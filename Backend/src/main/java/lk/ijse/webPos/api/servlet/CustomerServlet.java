@@ -44,7 +44,6 @@ public class CustomerServlet extends HttpServlet {
         ArrayList<CustomerDTO> list = customerBO.getAllCustomers();
         RespMessage<CustomerDTO> message = new RespMessage<>();
         String ok;
-        resp.setContentType("application/json");
         if (list != null) {
             ok = message.createMassage("OK", "Customers Load Successfully !", list);
             resp.setStatus(HttpServletResponse.SC_CREATED);
@@ -57,8 +56,8 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CustomerDTO customerDTO = JsonbBuilder.create().fromJson(req.getReader(), CustomerDTO.class);
-
-        if (ValidationUtil.validate(customerDTO.getCusId(), customerDTO.getCusName(), customerDTO.getAddress(), customerDTO.getSalary())) {
+        System.out.println(customerDTO);
+        if (ValidationUtil.validate(customerDTO)) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
             return;
@@ -78,18 +77,24 @@ public class CustomerServlet extends HttpServlet {
             ok = message.createMassage("NOT", e.getLocalizedMessage(), null);
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-        resp.setContentType("application/json");
         resp.getWriter().write(ok);
     }
 
-    private boolean setValues(HttpServletRequest req) throws IOException {
+    private boolean setValues(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         CustomerDTO customerDTO = JsonbBuilder.create().fromJson(req.getReader(), CustomerDTO.class);
+
         try {
-            id = customerDTO.getCusId();
-            name = customerDTO.getCusName();
-            address = customerDTO.getAddress();
-            salary = customerDTO.getSalary();
-            return true;
+            if (ValidationUtil.validate(customerDTO)) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
+                return false;
+            }else {
+                id = customerDTO.getCusId();
+                name = customerDTO.getCusName();
+                address = customerDTO.getAddress();
+                salary = customerDTO.getSalary();
+                return true;
+            }
         } catch (Exception e) {
             return false;
         }
@@ -97,7 +102,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (setValues(req)) {
+        if (setValues(req, resp)) {
             RespMessage<Customer> message = new RespMessage<>();
             String ok;
             try {
@@ -112,7 +117,6 @@ public class CustomerServlet extends HttpServlet {
                 ok = message.createMassage("NOT", e.getLocalizedMessage(), null);
                 resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-            resp.setContentType("application/json");
             resp.getWriter().println(ok);
         }
     }
@@ -120,6 +124,12 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         id = req.getParameter("id");
+        if (ValidationUtil.validateCusID(id)) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(new RespMessage<>().createMassage("400", "Bad Request !", null));
+            return;
+        }
+
         RespMessage<Customer> message = new RespMessage<>();
         String ok;
         if (customerBO.deleteCustomer(id)) {
@@ -129,7 +139,6 @@ public class CustomerServlet extends HttpServlet {
             ok = message.createMassage("NOT", "Customer Not Deleted !", null);
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-        resp.setContentType("application/json");
         resp.getWriter().write(ok);
     }
 }

@@ -58,4 +58,16 @@ public class ValidationUtil {
         }
         return true;
     }
+
+    public static boolean validateCusID(String id){
+        return !id.matches(customerRegex.get(0));
+    }
+
+    public static boolean validateItemID(String id){
+        return !id.matches(itemRegex.get(0));
+    }
+
+    public static boolean validateOrderID(String id){
+        return !id.matches( "^ORD-\\d{3}$");
+    }
 }
